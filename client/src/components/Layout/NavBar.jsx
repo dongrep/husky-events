@@ -1,23 +1,23 @@
 "use client";
 
 import React from "react";
-import Button from "../Button/PrimaryButton";
+import PrimaryButton from "../Button/PrimaryButton";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full mt-4 items-center flex justify-center">
       <div className="container px-8 text-[#000] flex justify-between">
-        <div className="text-lg font-semibold">
+        <div onClick={() => navigate("/")} className="text-lg hover:cursor-pointer font-semibold">
           Husky<span className="text-primary">Events</span>
         </div>
         <nav className="flex items-center gap-4">
-          <a href="#" className="text-lg flex items-center">
+          <a href="/" className="text-lg flex items-center">
             Login
           </a>
-          <Button
-            text="Sign Up"
-            onClickFunction={() => console.log("Sign Up")}
-          />
+          <PrimaryButton
+            >Sign Up</PrimaryButton>
         </nav>
       </div>
     </div>

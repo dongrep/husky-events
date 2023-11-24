@@ -1,15 +1,18 @@
-'use client';
+"use client";
 
 import React from "react";
 
-const Button = ({ text, onClickFunction }) => {
+const PrimaryButton = ({ children, buttonWidth, onClickFunction }) => {
   return (
     <div
       onClick={onClickFunction}
-      className="px-3 py-2 rounded-md bg-primary text-white flex justify-center items-center">
-      {text}
+      className={
+        buttonWidth +
+        " px-3 py-2 rounded-md bg-primary text-white flex justify-center items-center"
+      }>
+      {children}
     </div>
   );
 };
 
-export default Button;
+export default PrimaryButton;

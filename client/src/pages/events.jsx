@@ -1,7 +1,6 @@
 import DefaultLayout from "../components/Layout/DefaultLayout";
-import EventSearch from '../components/Event/EventSearch'
-import EventCard from '../components/Event/EventCard'
-
+import EventSearch from "../components/Event/EventSearch";
+import EventCard from "../components/Event/EventCard";
 
 const Events = () => {
   const eventsJSON = [
@@ -190,17 +189,20 @@ const Events = () => {
   return (
     <DefaultLayout>
       <div className="relative w-full h-full">
-        <div className="w-full mt-4 mb-12 relative h-36 lg:h-96 bg-yellow-600 rounded-md overflow-hidden">
+        <div className="w-full mt-4 mb-12 relative h-36 lg:h-[595px] bg-yellow-600 rounded-md overflow-hidden">
           <img
             src={"/hero.jpeg"}
             className="rounded-md overflow-clip layout-fill object-cover w-full h-full"
             alt="event"
           />
-          <div className="absolute top-12 flex w-full justify-center text-white text-xl lg:text-4xl font-bold">
-            MADE FOR THOSE WHO DO
+          <div className="absolute top-36 flex w-full justify-center text-white text-xl lg:text-4xl font-bold">
+            <div className="flex flex-col">
+              <div className="text-center">MADE FOR THOSE</div>
+              <div className="text-center">WHO DO</div>
+            </div>
           </div>
         </div>
-        <div className="absolute lg:flex top-[15%] hidden w-full justify-center">
+        <div className="absolute lg:flex top-[25%] hidden w-full justify-center">
           <EventSearch />
         </div>
         <div className="lg:px-16 mt-4 lg:mt-24 ">
