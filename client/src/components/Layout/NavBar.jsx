@@ -3,6 +3,8 @@
 import React from "react";
 import PrimaryButton from "../Button/PrimaryButton";
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -13,11 +15,12 @@ const NavBar = () => {
           Husky<span className="text-primary">Events</span>
         </div>
         <nav className="flex items-center gap-4">
-          <a href="/" className="text-lg flex items-center">
+        <Link to="/login" className="text-lg flex items-center">
             Login
-          </a>
-          <PrimaryButton
-            >Sign Up</PrimaryButton>
+          </Link>
+          <Link to="/signup">
+            <PrimaryButton>Sign Up</PrimaryButton>
+          </Link>
         </nav>
       </div>
     </div>
