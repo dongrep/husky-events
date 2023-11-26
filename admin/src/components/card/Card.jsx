@@ -3,7 +3,7 @@ import "./card.css";
 
 const Card = ({ item }) => {
   return (
-    <div className="container">
+    <div className="card-container">
       <MdSupervisedUserCircle size={24} />
       <div className="texts">
         <span className="title">{item.title}</span>
