@@ -1,21 +1,17 @@
-import logo from "./logo.svg";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
-import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/footer/Footer";
-import Sidebar from "./components/sidebar/Sidebar";
+import Dashboard from "./components/dashboard/Dashboard";
 
 function App() {
   return (
     <div className="App">
-      <div className="dashboard-container">
-        <div className="sidebar">
-          <Sidebar />
-        </div>
-        <div className="content">
-          <Navbar />
-          <Footer />
-        </div>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Dashboard />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
