@@ -188,7 +188,7 @@ const Events = () => {
 
   return (
     <DefaultLayout>
-      <div className="relative w-full h-full">
+      <div className="relative align-middle w-full h-full">
         <div className="w-full mt-4 mb-12 relative h-36 lg:h-[595px] bg-yellow-600 rounded-md overflow-hidden">
           <img
             src={"/hero.jpeg"}
