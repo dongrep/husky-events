@@ -15,7 +15,7 @@ const Events = () => {
         <Navbar />
         <div className="event-container">
           <div className="top">
-            <Search placeholder="Search events...." setInput={setInput} />
+            <Search placeholder="Search events...." />
             <Link to="/events/add">
               <button className="addButton">Add New</button>
             </Link>
@@ -47,18 +47,13 @@ const Events = () => {
                   <td>{event?.endTime}</td> */}
                   <td>{event?.location}</td>
                   <td>{event?.cost || "Free"}</td>
-                  <td>{handleEventStatus(event?.startDate, event?.endDate)}</td>
+                  <td>{"Pending"}</td>
                   <td>
                     <div className="buttons">
                       <Link to={`/events/${event?._id}`}>
                         <button className={`button view`}>View</button>
                       </Link>
-                      <button
-                        className={`button delete`}
-                        onClick={() => handleDelete(event?._id)}
-                      >
-                        Delete
-                      </button>
+                      <button className={`button delete`}>Delete</button>
                     </div>
                   </td>
                 </tr>
