@@ -3,7 +3,7 @@ import DefaultLayout from "../components/Layout/DefaultLayout";
 import EventDetailsHero from "../components/Event/EventDetailsHero";
 
 const EventDetails = () => {
-  return (
+    return (
     <DefaultLayout>
       <EventDetailsHero />
     </DefaultLayout>

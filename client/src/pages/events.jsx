@@ -188,7 +188,7 @@ const Events = () => {
 
   return (
     <DefaultLayout>
-      <div className="relative align-middle w-full h-full">
+      <div className="relative w-full h-full">
         <div className="w-full mt-4 mb-12 relative h-36 lg:h-[595px] bg-yellow-600 rounded-md overflow-hidden">
           <img
             src={"/hero.jpeg"}
@@ -210,8 +210,8 @@ const Events = () => {
             Upcoming <span className="text-primary">Events</span>
           </div>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-y-4 gap-x-5 grid-cols-1 justify-between">
-            {eventsJSON.map((event) => (
-              <EventCard key={event.name} event={event} />
+            {eventsJSON.map((event, index) => (
+              <EventCard key={event.name + index} event={event} />
             ))}
           </div>
         </div>
