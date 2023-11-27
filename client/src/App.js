@@ -11,8 +11,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Events />}></Route>
-          <Route path="/event" element={<EventDetails />}></Route>
-          <Route path="/event/register" element={<RegistrationForm />}></Route>
+          <Route path="event/:id" element={<EventDetails />}></Route>
+          <Route path="event/:id/register" element={<RegistrationForm />}></Route>
         </Routes>
       </BrowserRouter>
     </EventProvider>

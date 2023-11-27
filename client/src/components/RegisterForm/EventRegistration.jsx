@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEventContext } from "../../context/useEventContext";
 
 const EventRegistration = () => {
   const { currentEvent } = useEventContext();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [tickets, setTickets] = useState(1);
+
+  const register = (e) => {
+    e.preventDefault();
+    const data = {
+      name: name,
+      email: email,
+      phone: phone,
+      tickets: tickets,
+      event: currentEvent.name,
+    };
+    console.log(data);
+  };
 
   return (
     <div className="flex flex-col justify-center">
@@ -19,6 +36,7 @@ const EventRegistration = () => {
               id="name"
               placeholder="Your name"
               className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="flex flex-col space-y-1">
@@ -29,6 +47,7 @@ const EventRegistration = () => {
               id="email"
               placeholder="Your email"
               className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="flex flex-col space-y-1">
@@ -39,51 +58,28 @@ const EventRegistration = () => {
               id="phone"
               placeholder="Your phone number"
               className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
           <div className="flex flex-col space-y-1">
-            <label htmlFor="address">Address</label>
+            <label htmlFor="noOfTickets">Tickets</label>
             <input
-              type="text"
-              name="address"
-              id="address"
-              placeholder="Your address"
+              type="number"
+              name="noOfTickets"
+              value={tickets}
+              min={1}
+              max={10}
+              id="noOfTickets"
+              placeholder="Number of tickets"
               className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-          </div>
-          <div className="flex flex-col space-y-1">
-            <label htmlFor="city">City</label>
-            <input
-              type="text"
-              name="city"
-              id="city"
-              placeholder="Your city"
-              className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-          </div>
-          <div className="flex flex-col space-y-1">
-            <label htmlFor="postalCode">Postal Code</label>
-            <input
-              type="text"
-              name="postalCode"
-              id="postalCode"
-              placeholder="Your postal code"
-              className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-          </div>
-          <div className="flex flex-col space-y-1">
-            <label htmlFor="country">Country</label>
-            <input
-              type="text"
-              name="country"
-              id="country"
-              placeholder="Your country"
-              className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              onChange={(e) => setTickets(e.target.value)}
             />
           </div>
         </div>
         <div className="flex justify-center my-4">
-          <button className="px-4 py-2 rounded-md bg-primary text-white">
+          <button
+            onClick={(e) => register(e)}
+            className="px-4 py-2 rounded-md bg-primary text-white">
             Register
           </button>
         </div>
