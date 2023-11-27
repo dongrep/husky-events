@@ -8,19 +8,19 @@ import Contact from '../components/Layout/Contact';
 const About = () => {
     const slides = [
         {
-          url: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2620&q=80',
+          Path : './stock17.jpg',
         },
         {
-          url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80',
+          Path : './stock13.jpg',
         },
         {
-          url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80',
-        },  
-        {
-          url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
+          Path : './stock19.jpg',
         },
         {
-          url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80',
+          Path : './stock15.jpg',
+        },
+        {
+          Path : './stock21.jpg',
         },
       ];
     
@@ -86,12 +86,13 @@ const About = () => {
     </div>
     <div className='w-screen py-[10rem] justify-center text-center m-auto px-4 relative group'>
             <div>
-                <h1 className='text-6xl font-bold font-serif text-center'>Memory Collage</h1><br></br>
-                <p className='text-2xl font- gap-2 text-center'> Empowering Your Campus Experience: Navigate, Discover, and Engage with Ease through the Husky Events.</p><br></br>   
+                <h1 className='text-8xl font-bold font-serif text-center'>Memory Collage</h1><br></br>
+                <div className="line h-1 w-20 bg-blue-300 my-4 mx-auto"></div>
+                <p className='text-3xl font- gap-2 text-center'> Empowering Your Campus Experience: Navigate, Discover, and Engage with Ease through the Husky Events.</p><br></br>   
             </div>
         <div
-          style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-          className='h-[500px] rounded-2xl bg-center bg-cover duration-500'
+          style={{ backgroundImage: `url(${slides[currentIndex].Path})` }}
+          className='h-[900px] rounded-2xl bg-cover duration-500'
         ></div>
 
         {/* Left Arrow */}
@@ -120,7 +121,7 @@ const About = () => {
     <div className="relative flex flex-wrap justify-center gap-32 font-serif text-3xl w-screen">
         <img
         src={"/counter.jpg"}
-        className="absolute inset-0 object-cover w-full h-[100px] bg-blue-400 bg-opacity-200 bg-origin-content"
+        className="absolute inset-0 object-cover w-full h-[120px] bg-blue-400 bg-opacity-200 bg-origin-content justify-center"
         alt="event"
         />
         <div className="relative col-lg-3 col-sm-6 text-center z-10">

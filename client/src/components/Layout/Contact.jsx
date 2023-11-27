@@ -2,9 +2,10 @@ import React from 'react'
 
 const Contact = () => {
   return (
-    <div id='contact' className='max-w-[1140px] m-auto w-full p-4 py-16 items-center'>
+    <div id='contact' className='max-w-[1240px] m-auto w-screen p-4 py-16 items-center'>
         <h2 className=' text-4xl text-center text-gray-900'>SEND US A MESSAGE</h2>
-        <p className='text-center text-gray-700'>Let's Create Memorable Moments Together - Reach Out and Plan Your Perfect Event with Us!</p>
+        <div className="line h-1 w-20 bg-blue-300 my-4 mx-auto"></div>
+        <p className='text-2xl text-center text-gray-700'>Let's Create Memorable Moments Together - Reach Out and Plan Your Perfect Event with Us!</p>
         <div className='grid md:grid-cols-2'>
             <img 
                 src={"/counter.jpg"}
