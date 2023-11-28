@@ -5,10 +5,11 @@ import EventCard from '../components/Event/ProfileInput';
 const Profile = () => {
   const profileInfo = {
     name: 'Preyash Mehta',
-    gender: 'Female', 
+    gender: 'Male', 
+    NUID : '001054338',
     email: 'mehta.prey@northeastern.edu',
     location: 'Boston, United States',
-    github: 'github.com/yourusername',
+    github: 'github.com/preyashmehta',
   };
 
   const bookedEvents = [
@@ -43,6 +44,7 @@ const Profile = () => {
             <ul className="list-disc pl-4">
               <li><span style={{ fontWeight: 'bold' }}>Email:</span> {profileInfo.email}</li>
               <li><span style={{ fontWeight: 'bold' }}>Gender:</span> {profileInfo.gender}</li>
+              <li><span style={{ fontWeight: 'bold' }}>NUID:</span> {profileInfo.NUID}</li>
               <li><span style={{ fontWeight: 'bold' }}>Location:</span> {profileInfo.location}</li>
               <li><span style={{ fontWeight: 'bold' }}>GitHub:</span> {profileInfo.github}</li>
             </ul>
