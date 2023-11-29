@@ -21,7 +21,7 @@ const EventCard = ({ event }) => {
           Free
         </div>
         <img
-          src={event.images}
+          src={event.image}
           className="rounded-md overflow-clip layout-fill object-contain w-full h-full "
           alt="event"
         />

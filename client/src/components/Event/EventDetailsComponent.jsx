@@ -7,7 +7,7 @@ const EventDetailsComponent = ({ currentEvent }) => {
     <div className="relative w-full h-full">
       <div className="w-full mt-4 relative h-[255px] lg:h-[595px] rounded-t-md overflow-hidden">
         <img
-          src={currentEvent.images}
+          src={currentEvent.image}
           className="layout-fill object-cover w-full h-full"
           alt="event"
         />
