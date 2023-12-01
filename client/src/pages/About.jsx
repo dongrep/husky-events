@@ -4,6 +4,7 @@ import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 import { useState } from 'react';
 import { RxDotFilled } from 'react-icons/rx';
 import Contact from '../components/Layout/Contact';
+import Testimonial from '../components/Event/Testimonial';
 
 const About = () => {
     const slides = [
@@ -44,6 +45,7 @@ const About = () => {
 
   return (
     <DefaultLayout>
+    {/* Card Style component*/}
     <div className='w-screen py-[10rem] px-4 bg-white'>
         <div className="col-12 text-center">
             <h1 className="text-8xl font-semibold font-serif ">About Us</h1>
@@ -84,6 +86,7 @@ const About = () => {
           </div>
       </div>
     </div>
+    {/* Carousel */}
     <div className='w-screen py-[10rem] justify-center text-center m-auto px-4 relative group'>
             <div>
                 <h1 className='text-8xl font-bold font-serif text-center'>Memory Collage</h1><br></br>
@@ -118,6 +121,7 @@ const About = () => {
           ))}
         </div>
     </div>
+    {/* Counter */}
     <div className="relative flex flex-wrap justify-center gap-32 font-serif text-3xl w-screen">
         <img
         src={"/counter.jpg"}
@@ -141,6 +145,7 @@ const About = () => {
             <h6 className="text-uppercase mb-0 mt-3 text-white">Team Members</h6>
         </div>
     </div>
+    <Testimonial />
     <Contact />
     </DefaultLayout>
   )

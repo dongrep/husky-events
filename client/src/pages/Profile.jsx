@@ -5,7 +5,7 @@ import EventCard from '../components/Event/ProfileInput';
 const Profile = () => {
   const profileInfo = {
     name: 'Preyash Mehta',
-    gender: 'Female', 
+    gender: 'Male', 
     NUID : '001054338',
     email: 'mehta.prey@northeastern.edu',
     location: 'Boston, United States',
@@ -15,7 +15,6 @@ const Profile = () => {
   const bookedEvents = [
     { id: 1, name: 'Event-1', date: '2023-09-19' },
     { id: 2, name: 'Event-2', date: '2023-10-27' },
-    // Add more events as needed
   ];
 
   const profileImages = {
