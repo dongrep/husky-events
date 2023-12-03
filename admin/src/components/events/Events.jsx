@@ -15,7 +15,7 @@ const Events = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/event/getAll");
+        const res = await axios.get("http://localhost:8800/event/events");
         console.log("Hello    fetchData   res:", res);
         setEvents(res.data);
       } catch (error) {
@@ -92,7 +92,7 @@ const Events = () => {
             <thead>
               <tr>
                 <td>Name</td>
-                <td>Organization Id</td>
+                <td>Organizer</td>
                 {/* <td>Start Time</td>
                 <td>End Time</td> */}
                 <td>Location</td>
