@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
 
 const TestimonialCard = ({ imgSrc, professorName, message }) => {
@@ -12,13 +13,13 @@ const TestimonialCard = ({ imgSrc, professorName, message }) => {
           />
         </div>
         <div className="p-8">
-          <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+          <div className="uppercase tracking-wide text-md text-indigo-500 font-semibold">
             Professor
           </div>
-          <p className="block mt-1 text-lg leading-tight font-medium text-black">
+          <p className="block text-2xl mt-1 leading-tight font-medium font-serif text-black">
             {professorName}
           </p>
-          <p className="mt-2 text-gray-500">{message}</p>
+          <p className="mt-2 text-gray-500 font-sans">{message}</p>
         </div>
       </div>
     </div>
@@ -29,15 +30,15 @@ const Testimonial = () => {
   const testimonials = [
     {
       imgSrc: './Prof1.jpeg',
-      professorName: ' Prof Gregory D. Abowd',
+      professorName: ' Dr. Gregory D. Abowd',
       message:
         'Excited to be part of this years Husky Event at NEU Its a fantastic opportunity for students to engage beyond the classroom, fostering a sense of community and exploration. Looking forward to inspiring discussions and memorable experiences.',
     },
     {
       imgSrc: './Prof2.jpeg',
-      professorName: 'Prof George G. Adams',
+      professorName: 'Dr. George G. Adams',
       message:
-      'Thrilled to support the upcoming Husky Event a hub of knowledge, creativity, and collaboration. These events showcase the diverse talents of our students and reinforce the spirit of innovation that defines our university. Cant wait to see the energy and ideas that unfold!.',
+      'Thrilled to support the upcoming Husky Event a hub of knowledge, creativity, and collaboration. These events showcase the diverse talents of our students and reinforce the spirit of innovation that defines our university. Cant wait to see the energy and ideas that unfold!',
     },
   ];
 
