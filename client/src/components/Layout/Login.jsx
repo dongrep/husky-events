@@ -11,6 +11,7 @@ export default function Login() {
     password: '',
   });
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
   const handleLogin = async () => {
     try {
       const response = await fetch('http://localhost:3002/user/login', {
@@ -36,7 +37,12 @@ export default function Login() {
         // Redirect or perform other actions upon successful login
       } else {
         console.error(`Login failed: ${data.message}`);
-        // Handle login failure, show message to the user, etc.
+
+        setShowErrorMessage('Invalid email or password. Please try again.');
+        // Show error message for a certain duration (e.g., 5 seconds)
+        setTimeout(() => {
+          setShowErrorMessage(false);
+        }, 3000);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -111,6 +117,18 @@ export default function Login() {
             </button>
           </div>
         )}
+
+{showErrorMessage && (
+        <div className="bg-red-200 p-4 rounded fixed top-0 right-0 mt-4 mr-4">
+          <p className="text-red-800">{showErrorMessage}</p>
+          <button
+            className="text-sm text-gray-600 cursor-pointer focus:outline-none"
+            onClick={() => setShowErrorMessage(false)}
+          >
+            &#10006; {/* Unicode character for the 'X' cross */}
+          </button>
+        </div>
+      )}
           <div className="text-center font-['Product_Sans'] text-[#7e7e7e] ml-[280px]">
             Or
           </div>

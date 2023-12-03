@@ -19,6 +19,7 @@ export default function Signup() {
 
   // Function to handle form submission
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState('');
   const handleSignup = async () => {
     try {
       const response = await fetch('http://localhost:3002/user/signup', {
@@ -43,10 +44,12 @@ export default function Signup() {
         // Redirect or perform any other action on successful signup
       } else {
         console.error(`Error: ${data.message}`);
+        setShowErrorMessage('Signup failed. Please check your information and try again.');
         // Handle error, show message to the user, etc.
       }
     } catch (error) {
       console.error('Error:', error);
+      setShowErrorMessage('An unexpected error occurred. Please try again later.');
       // Handle network errors or other exceptions
     }
   };
@@ -178,6 +181,18 @@ export default function Signup() {
             </button>
           </div>
         )}
+
+        {showErrorMessage && (
+        <div className="bg-red-200 p-4 rounded fixed top-0 right-0 mt-4 mr-4">
+          <p className="text-red-800">{showErrorMessage}</p>
+          <button
+            className="text-sm text-gray-600 cursor-pointer focus:outline-none"
+            onClick={() => setShowErrorMessage('')}
+          >
+            &#10006; {/* Unicode character for the 'X' cross */}
+          </button>
+        </div>
+      )}
           </div>
         </div>
       </div>
