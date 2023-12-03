@@ -1,21 +1,62 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
 import Sidebar from "../sidebar/Sidebar";
 import "./userDetails.css";
-
-const user = {
-  id: 1,
-  firstName: "John",
-  lastName: "Doe",
-  email: "john@gmail.com",
-  password: "abc@123",
-  phone: 123456,
-  profileImage: "",
-  role: "user",
-};
+import Toast from "../toast/Toast";
 
 const UserDetails = () => {
+  // const user = {
+  //   id: 1,
+  //   firstName: "John",
+  //   lastName: "Doe",
+  //   email: "john@gmail.com",
+  //   password: "abc@123",
+  //   phone: 123456,
+  //   profileImage: "",
+  //   role: "user",
+  // };
+
+  const [user, setUser] = useState({});
+  const [showUpdateToast, setShowUpdateToast] = useState(false);
+  console.log("Hello    UserDetails   user:", user);
+  const userId = useLocation().pathname.split("/").pop();
+  console.log("Hello    UserDetails   userId:", userId);
+
+  const handleChange = (e) => {
+    setUser((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8800/user/get/${userId}`);
+        console.log("Hello    fetchData   res:", res);
+        setUser(res.data);
+      } catch (error) {
+        console.log("Hello    fetchData   error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const onSubmit = async () => {
+    try {
+      const res = await axios.put(
+        `http://localhost:8800/user/edit/${userId}`,
+        user
+      );
+      setShowUpdateToast(true);
+      console.log("Hello    onSubmit   res:", res);
+    } catch (error) {
+      console.log("Hello    onSubmit   error:", error);
+    }
+  };
+
   return (
     <div className="dashboard-container">
       <div className="sidebar">
@@ -33,6 +74,7 @@ const UserDetails = () => {
                 placeholder="Enter first name"
                 value={user.firstName}
                 id="firstName"
+                onChange={handleChange}
               />
             </div>
             <div className="formGroup">
@@ -42,6 +84,7 @@ const UserDetails = () => {
                 placeholder="Enter last name"
                 value={user.lastName}
                 id="lastName"
+                onChange={handleChange}
               />
             </div>
             <div className="formGroup">
@@ -51,6 +94,7 @@ const UserDetails = () => {
                 placeholder="Enter email"
                 value={user.email}
                 id="email"
+                onChange={handleChange}
               />
             </div>
             <div className="formGroup">
@@ -60,6 +104,7 @@ const UserDetails = () => {
                 placeholder="Enter password"
                 value={user.password}
                 id="password"
+                onChange={handleChange}
               />
             </div>
             <div className="formGroup">
@@ -69,11 +114,12 @@ const UserDetails = () => {
                 placeholder="Enter Phone Number"
                 value={user.phone}
                 id="phone"
+                onChange={handleChange}
               />
             </div>
             <div className="formGroup">
               <label htmlFor="">Role</label>
-              <select value={user.role} id="role">
+              <select value={user.role} id="role" onChange={handleChange}>
                 <option value="user">User</option>
                 <option value="organization">Organization</option>
                 <option value="admin">Admin</option>
@@ -81,8 +127,17 @@ const UserDetails = () => {
             </div>
           </div>
           <div className="buttonContainer">
-            <button className="createButton">Update</button>
+            <button className="createButton" onClick={onSubmit}>
+              Update
+            </button>
           </div>
+          <Toast
+            message={"User Details have been updated"}
+            show={showUpdateToast}
+            onClose={() => {
+              setShowUpdateToast(false);
+            }}
+          />
         </div>
         <Footer />
       </div>

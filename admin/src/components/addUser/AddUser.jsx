@@ -1,9 +1,13 @@
 import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
 import Sidebar from "../sidebar/Sidebar";
 import "./addUser.css";
+import Toast from "../toast/Toast";
 
 const AddUser = () => {
   const INITIAL_STATE = {
@@ -14,6 +18,31 @@ const AddUser = () => {
     phone: "",
     profileImage: "",
     role: "user",
+  };
+  const navigate = useNavigate();
+
+  const [info, setInfo] = useState(INITIAL_STATE);
+  const [showCreateToast, setShowCreateToast] = useState(false);
+
+  console.log("Hello    AddUser   info:", info);
+
+  const handleChange = (e) => {
+    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const onSubmit = async () => {
+    try {
+      const res = await axios.post("http://localhost:8800/user/create", info);
+      console.log("Hello    onSubmit   res:", res);
+
+      setShowCreateToast(true);
+
+      setTimeout(() => {
+        navigate("/users");
+      }, 2000);
+    } catch (error) {
+      console.log("Hello    onSubmit   error:", error);
+    }
   };
 
   return (
@@ -32,15 +61,26 @@ const AddUser = () => {
                 type="text"
                 id="firstName"
                 placeholder="Enter first name"
+                onChange={handleChange}
               />
             </div>
             <div className="formGroup">
               <label htmlFor="">Last Name</label>
-              <input type="text" id="lastName" placeholder="Enter last name" />
+              <input
+                type="text"
+                id="lastName"
+                placeholder="Enter last name"
+                onChange={handleChange}
+              />
             </div>
             <div className="formGroup">
               <label htmlFor="">Email</label>
-              <input type="text" id="email" placeholder="Enter email" />
+              <input
+                type="text"
+                id="email"
+                placeholder="Enter email"
+                onChange={handleChange}
+              />
             </div>
             <div className="formGroup">
               <label htmlFor="">Password</label>
@@ -48,15 +88,21 @@ const AddUser = () => {
                 type="password"
                 id="password"
                 placeholder="Enter password"
+                onChange={handleChange}
               />
             </div>
             <div className="formGroup">
               <label htmlFor="">Phone Number</label>
-              <input type="text" id="phone" placeholder="Enter Phone Number" />
+              <input
+                type="text"
+                id="phone"
+                placeholder="Enter Phone Number"
+                onChange={handleChange}
+              />
             </div>
             <div className="formGroup">
               <label htmlFor="">Role</label>
-              <select id="role">
+              <select id="role" onChange={handleChange}>
                 <option value="user">User</option>
                 <option value="organization">Organization</option>
                 <option value="admin">Admin</option>
@@ -64,8 +110,17 @@ const AddUser = () => {
             </div>
           </div>
           <div className="buttonContainer">
-            <button className="createButton">Create</button>
+            <button className="createButton" onClick={onSubmit}>
+              Create
+            </button>
           </div>
+          <Toast
+            message={"User has been created"}
+            show={showCreateToast}
+            onClose={() => {
+              setShowCreateToast(false);
+            }}
+          />
         </div>
         <Footer />
       </div>
