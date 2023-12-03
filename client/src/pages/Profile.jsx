@@ -1,60 +1,70 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import DefaultLayout from '../components/Layout/DefaultLayout';
 import EventCard from '../components/Event/ProfileInput';
 
 const Profile = () => {
-  const profileInfo = {
-    name: 'Preyash Mehta',
-    gender: 'Male', 
-    NUID : '001054338',
-    email: 'mehta.prey@northeastern.edu',
-    location: 'Boston, United States',
-    github: 'github.com/preyashmehta',
-  };
+  const [profileInfo, setProfileInfo] = useState({});
+  const [bookedEvents, setBookedEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const bookedEvents = [
-    { id: 1, name: 'Event-1', date: '2023-09-19' },
-    { id: 2, name: 'Event-2', date: '2023-10-27' },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/user/getUser?dongrep@northeastern.edu');
+        const data = await response.json();
+        const { user, bookedEvents } = data;
 
-  const profileImages = {
-    Male: './Male.jpg', 
-    Female: './Female.jpg', 
-  };
+        setProfileInfo(user);
+        setBookedEvents(bookedEvents);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
+    };
 
-  const profileImage = profileImages[profileInfo.gender];
+    fetchData();
+  }, []);
 
   return (
     <DefaultLayout>
       <div className="bg-zinc-200 w-screen grid grid-flow-row items-center justify-center mb-6 mt-6 shadow-md">
         <div className="bg-white p-10 rounded-md shadow-md">
           <img
-            src={profileImage} 
+            src={profileInfo.gender === 'Male' ? './Male.jpg' : './Female.jpg'}
             alt="Profile"
             className="rounded-full mx-auto mb-4 h-44"
           />
           <h1 className="text-3xl font-bold mb-2 text-center font-serif">{profileInfo.name}</h1>
           <p className="text-gray-500 mb-4">{profileInfo.role}</p>
 
+          {/* Profile Information */}
           <div className="mb-4 font-light">
             <div className="flex flex-col items-center">
-                <h2 className="text-xl font-semibold mb-2 font-serif">Profile Information:</h2>
-                <div className="line h-1 w-20 bg-blue-300"></div>
+              <h2 className="text-xl font-semibold mb-2 font-serif">Profile Information:</h2>
+              <div className="line h-1 w-20 bg-blue-300"></div>
             </div>
             <ul className="text-xl list-disc pl-4 mt-4 font-sans">
-              <li><span style={{ fontWeight: 'bold' }}>Email:</span> {profileInfo.email}</li>
-              <li><span style={{ fontWeight: 'bold' }}>NUID:</span> {profileInfo.NUID}</li>
-              <li><span style={{ fontWeight: 'bold' }}>Location:</span> {profileInfo.location}</li>
-              <li><span style={{ fontWeight: 'bold' }}>GitHub:</span> {profileInfo.github}</li>
+              <li>
+                <span style={{ fontWeight: 'bold' }}>Email:</span> {profileInfo.email}
+              </li>
+              <li>
+                <span style={{ fontWeight: 'bold' }}>NUID:</span> {profileInfo.NUID}
+              </li>
+              <li>
+                <span style={{ fontWeight: 'bold' }}>Location:</span> {profileInfo.location}
+              </li>
             </ul>
-          </div><br></br>
+          </div>
 
+          {/* Booked Events */}
           <div>
             <div className="flex flex-col items-center">
               <h2 className="text-2xl font-semibold mb-2">Booked Events :</h2>
               <div className="line h-1 w-20 bg-blue-300"></div>
-            </div> <br></br>
-            <div> 
+            </div>
+            <br></br>
+            <div>
               {bookedEvents.map(event => (
                 <EventCard key={event.id} event={event} />
               ))}
@@ -64,6 +74,6 @@ const Profile = () => {
       </div>
     </DefaultLayout>
   );
-}
+};
 
 export default Profile;
