@@ -35,7 +35,7 @@ const Events = () => {
       cost: "free",
     },
     {
-      name: "Sample Event 1",
+      name: "Sample Event 3",
       description: "This is a sample event description.",
       userAdmin: "user123",
       scheduleTime: "2023-11-21T14:30:00Z",
@@ -50,7 +50,7 @@ const Events = () => {
       cost: 25.99,
     },
     {
-      name: "Sample Event 2",
+      name: "Sample Event 4",
       description: "Another sample event description.",
       userAdmin: "user456",
       scheduleTime: "2023-12-05T18:00:00Z",
@@ -65,7 +65,7 @@ const Events = () => {
       cost: "free",
     },
     {
-      name: "Sample Event 1",
+      name: "Sample Event 5",
       description: "This is a sample event description.",
       userAdmin: "user123",
       scheduleTime: "2023-11-21T14:30:00Z",
@@ -80,7 +80,7 @@ const Events = () => {
       cost: 25.99,
     },
     {
-      name: "Sample Event 2",
+      name: "Sample Event 6",
       description: "Another sample event description.",
       userAdmin: "user456",
       scheduleTime: "2023-12-05T18:00:00Z",
@@ -95,7 +95,7 @@ const Events = () => {
       cost: "free",
     },
     {
-      name: "Sample Event 1",
+      name: "Sample Event 7",
       description: "This is a sample event description.",
       userAdmin: "user123",
       scheduleTime: "2023-11-21T14:30:00Z",
@@ -110,7 +110,7 @@ const Events = () => {
       cost: 25.99,
     },
     {
-      name: "Sample Event 2",
+      name: "Sample Event 8",
       description: "Another sample event description.",
       userAdmin: "user456",
       scheduleTime: "2023-12-05T18:00:00Z",
@@ -125,7 +125,7 @@ const Events = () => {
       cost: "free",
     },
     {
-      name: "Sample Event 1",
+      name: "Sample Event 9",
       description: "This is a sample event description.",
       userAdmin: "user123",
       scheduleTime: "2023-11-21T14:30:00Z",
@@ -140,7 +140,7 @@ const Events = () => {
       cost: 25.99,
     },
     {
-      name: "Sample Event 2",
+      name: "Sample Event 10",
       description: "Another sample event description.",
       userAdmin: "user456",
       scheduleTime: "2023-12-05T18:00:00Z",
@@ -155,7 +155,7 @@ const Events = () => {
       cost: "free",
     },
     {
-      name: "Sample Event 1",
+      name: "Sample Event 11",
       description: "This is a sample event description.",
       userAdmin: "user123",
       scheduleTime: "2023-11-21T14:30:00Z",
@@ -170,7 +170,7 @@ const Events = () => {
       cost: 25.99,
     },
     {
-      name: "Sample Event 2",
+      name: "Sample Event 12",
       description: "Another sample event description.",
       userAdmin: "user456",
       scheduleTime: "2023-12-05T18:00:00Z",

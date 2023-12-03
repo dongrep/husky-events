@@ -1,58 +1,116 @@
-import { Link } from 'react-router-dom';
-import PrimaryButton from "../Button/PrimaryButton";
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import PrimaryButton from '../Button/PrimaryButton';
 
 export default function Login() {
+
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Login successful
+        console.log('Login successful:', data.user);
+       
+        setShowSuccessMessage('User successfully logged in!');
+        setTimeout(() => {
+          setShowSuccessMessage(false);
+          navigate('/');
+        }, 2000);
+
+        // Redirect or perform other actions upon successful login
+      } else {
+        console.error(`Login failed: ${data.message}`);
+        // Handle login failure, show message to the user, etc.
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle network errors or other exceptions
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
   return (
-    <div
-      id="SigninRoot"
-      className="bg-[#f8f8fa] flex flex-row justify-between pl-32 w-full items-start rounded-[20px]"
-    >
+    <div id="SigninRoot" className="bg-[#f8f8fa] flex flex-row justify-between pl-32 w-full items-start rounded-[20px]">
       <div className="flex flex-col mt-24 gap-24 w-2/5 items-start">
         <div className="flex flex-col ml-32 gap-20 w-3/5 h-40 items-start">
-          <div
-            id="EventHive1"
-            className="text-center text-2xl font-['Product_Sans'] font-bold ml-[110px]"
-          >
-            Event<span className="text-[#7848f4]"> Husky</span>
+          <div className="text-lg hover:cursor-pointer font-semibold">
+            Husky<span className="text-primary">Events</span>
           </div>
           <div className="text-center text-4xl font-['Product_Sans'] font-bold">
-            Sign In to Event Husky
+            Sign In to Husky Events
           </div>
         </div>
         <div className="flex flex-col justify-between w-full h-[455px] items-start">
           <div className="flex flex-col gap-10 w-full items-start">
             <div className="flex flex-col gap-4 w-full items-start">
               <div className="font-['Product_Sans']">YOUR EMAIL</div>
-              <div
-                id="Input"
+              <input
+                type="text"
+                id="email"
                 className="text-xs font-['Product_Sans'] text-[#687c94] bg-white flex flex-row w-full h-12 items-start pt-4 px-2 rounded"
-              >
-                Enter your mail
-              </div>
+                placeholder="Enter your email"
+                onChange={handleInputChange}
+              />
             </div>
             <div className="flex flex-col gap-4 w-full items-start">
               <div className="flex flex-row justify-between w-full items-start">
                 <div className="font-['Product_Sans']">PASSWORD</div>
                 <div className="font-['Product_Sans'] text-[#7e7e7e]">
+                  <Link to="/signup">
                   Forgot your password?
+                  </Link>
                 </div>
               </div>
-              <div
-                id="Input1"
+              <input
+                type="password"
+                id="password"
                 className="text-xs font-['Product_Sans'] text-[#687c94] bg-white flex flex-row w-full h-12 items-start pt-4 px-2 rounded"
-              >
-                Enter your password
-              </div>
+                placeholder="Enter your password"
+                onChange={handleInputChange}
+              />
             </div>
           </div>
-          <Link to="/">
-          <PrimaryButton
-            id="Button1"
-            className="text-center font-['Product_Sans'] text-white bg-[#7848f4] flex flex-row justify-center ml-40 pt-3 w-2/5 h-10 cursor-pointer items-start rounded"
-          >
-            Sign In
-          </PrimaryButton>
-          </Link>
+          <button
+        id="Button1"
+        className="text-center font-['Product_Sans'] text-white bg-[#7848f4] flex flex-row justify-center ml-40 pt-3 w-2/5 h-10 cursor-pointer items-start rounded"
+        onClick={handleLogin}
+      >
+        Sign In
+      </button>
+
+      {showSuccessMessage && (
+          <div className="bg-green-200 p-4 rounded fixed  top-0 right-0 mt-4 mr-4">
+            <p className="text-green-800">User successfully logged in!</p>
+            <button
+              className="text-sm text-gray-600 cursor-pointer focus:outline-none"
+              onClick={() => setShowSuccessMessage(false)}
+            >
+              &#10006; {/* Unicode character for the 'X' cross */}
+            </button>
+          </div>
+        )}
           <div className="text-center font-['Product_Sans'] text-[#7e7e7e] ml-[280px]">
             Or
           </div>
@@ -84,7 +142,7 @@ export default function Login() {
             Hello Friend
           </div>
           <div className="text-center font-['Product_Sans'] text-white">
-            To keep connected with us provide us with your information{" "}
+            To keep connected with us provide us with your information{' '}
           </div>
           <Link to="/signup">
             <PrimaryButton
