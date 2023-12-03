@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DefaultLayout from "../components/Layout/DefaultLayout";
-import EventDetailsHero from "../components/Event/EventDetailsHero";
+import EventDetailsComponent from "../components/Event/EventDetailsComponent";
+import { useParams } from "react-router-dom";
+import Loader from "../components/Loader";
+import axios from "axios";
 
 const EventDetails = () => {
+  const { id } = useParams();
+
+  const [loading, setLoading] = useState(true);
+  const [event, setEvent] = useState();
+
+  const fetchEvent = async () => {
+    setLoading(true);
+    const response = await axios.get(
+      `http://localhost:8800/event/getevent?_id=${id}`,
+    );
+    const data = await response.data;
+    console.log(data);
+    setEvent(data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (event) return;
+    fetchEvent();
+  }, [loading, event]);
+
   return (
     <DefaultLayout>
-      <EventDetailsHero />
+      {loading ? <Loader /> : <EventDetailsComponent currentEvent={event} />}
     </DefaultLayout>
   );
 };
