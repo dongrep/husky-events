@@ -1,4 +1,7 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
 import Sidebar from "../sidebar/Sidebar";
@@ -6,20 +9,56 @@ import "./eventDetails.css";
 
 const EventDetails = () => {
   // Ref event
-  const event = {
-    id: 1,
-    name: "Event 1",
-    description: "lorem 1231dw",
-    organizationID: "john@gmail.com",
-    startTime: "14.01.23",
-    endTime: "14.01.23",
-    location: "NEU",
-    startDate: "2023-11-23",
-    endDate: "2023-11-23",
-    images: [],
-    links: [],
-    tags: [],
-    cost: 0,
+  // const event = {
+  //   id: 1,
+  //   name: "Event 1",
+  //   description: "lorem 1231dw",
+  //   organizationID: "john@gmail.com",
+  //   startTime: "14.01.23",
+  //   endTime: "14.01.23",
+  //   location: "NEU",
+  //   startDate: "2023-11-23",
+  //   endDate: "2023-11-23",
+  //   images: [],
+  //   links: [],
+  //   tags: [],
+  //   cost: 0,
+  // };
+
+  const [event, setEvent] = useState({});
+  const eventId = useLocation().pathname.split("/").pop();
+  console.log("Hello    EventDetails   eventId:", eventId);
+
+  const handleChange = (e) => {
+    setEvent((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:8800/event/get/${eventId}`
+        );
+        console.log("Hello    fetchData   res:", res);
+        setEvent(res.data);
+      } catch (error) {
+        console.log("Hello    fetchData   error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const onSubmit = async () => {
+    try {
+      const res = await axios.put(
+        `http://localhost:8800/event/edit/${eventId}`,
+        event
+      );
+      console.log("Hello    onSubmit   res:", res);
+    } catch (error) {
+      console.log("Hello    onSubmit   error:", error);
+    }
   };
 
   return (
@@ -39,6 +78,7 @@ const EventDetails = () => {
                 placeholder="Enter you event name"
                 value={event?.name}
                 id="name"
+                onChange={handleChange}
               />
             </div>
             <div className="formGroup">
@@ -48,6 +88,7 @@ const EventDetails = () => {
                 placeholder="Enter you event location"
                 value={event?.location}
                 id="location"
+                onChange={handleChange}
               />
             </div>
             <div className="time">
@@ -58,6 +99,7 @@ const EventDetails = () => {
                   placeholder="Enter you event start time"
                   value={event?.startTime}
                   id="startTime"
+                  onChange={handleChange}
                 />
               </div>
               <div className="formGroup">
@@ -67,17 +109,28 @@ const EventDetails = () => {
                   placeholder="Enter you event end time"
                   value={event?.endTime}
                   id="endTime"
+                  onChange={handleChange}
                 />
               </div>
             </div>
             <div className="date">
               <div className="formGroup">
                 <label htmlFor="">Start Date</label>
-                <input type="date" value={event?.startDate} id="startDate" />
+                <input
+                  type="date"
+                  value={event?.startDate}
+                  id="startDate"
+                  onChange={handleChange}
+                />
               </div>
               <div className="formGroup">
                 <label htmlFor="">End Date</label>
-                <input type="date" value={event?.endDate} id="endDate" />
+                <input
+                  type="date"
+                  value={event?.endDate}
+                  id="endDate"
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <div className="formGroup">
@@ -87,11 +140,14 @@ const EventDetails = () => {
                 rows="6"
                 value={event?.description}
                 id="description"
+                onChange={handleChange}
               />
             </div>
           </div>
           <div className="buttonContainer">
-            <button className="createButton">Update</button>
+            <button className="createButton" onClick={onSubmit}>
+              Update
+            </button>
           </div>
         </div>
         <Footer />
