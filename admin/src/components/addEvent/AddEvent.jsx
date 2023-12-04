@@ -36,7 +36,7 @@ const AddEvent = () => {
   const onSubmit = async () => {
     try {
       const data = { ...info, organizationID: "101" };
-      const res = await axios.post("http://localhost:8800/event/create", data);
+      const res = await axios.post("http://localhost:8000/event/create", data);
       console.log("Hello    onSubmit   res:", res);
       navigate("/events");
     } catch (error) {

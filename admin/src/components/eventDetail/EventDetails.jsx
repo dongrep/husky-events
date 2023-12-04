@@ -37,7 +37,7 @@ const EventDetails = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8800/event/get/${eventId}`
+          `http://localhost:8000/event/getevent?_id=${eventId}`
         );
         console.log("Hello    fetchData   res:", res);
         setEvent(res.data);
@@ -52,7 +52,7 @@ const EventDetails = () => {
   const onSubmit = async () => {
     try {
       const res = await axios.put(
-        `http://localhost:8800/event/edit/${eventId}`,
+        `http://localhost:8000/event/edit/${eventId}`,
         event
       );
       console.log("Hello    onSubmit   res:", res);
