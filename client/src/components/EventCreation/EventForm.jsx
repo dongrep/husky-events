@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const EventForm = () => {
@@ -18,7 +19,7 @@ const EventForm = () => {
     }
   };
 
-  const register = (e) => {
+  const createEvent = async (e) => {
     e.preventDefault();
     const data = {
       name: name,
@@ -30,8 +31,14 @@ const EventForm = () => {
       image: image,
       tags: tags,
     };
-    console.log(data);
-  };
+    const response = await axios.post(
+      `http://localhost:8000/event/create`,
+      data,
+    );
+    const res = await response.data;
+    console.log(res);
+    alert("Event created successfully");
+  }
 
   return (
     <div className="flex flex-col justify-center">
@@ -205,7 +212,7 @@ const EventForm = () => {
         </div>
         <div className="flex justify-center my-4">
           <button
-            onClick={(e) => register(e)}
+            onClick={(e) => createEvent(e)}
             className="px-4 py-2 rounded-md bg-primary text-white">
             Create Event
           </button>
