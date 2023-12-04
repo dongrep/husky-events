@@ -43,12 +43,12 @@ const Testimonial = () => {
   ];
 
   return (
-    <div className=' w-full'>
-    <h2 className='text-5xl text-center text-gray-900 mb-4 mt-24'>
+    <div className='w-full'>
+    <h1 className='text-5xl text-centerfont-bold text-center mb-10 mt-24'>
       MESSAGE FROM OUR PROFESSORS
-    </h2>
+    </h1>
     <div className="line h-1 w-20 bg-blue-300 mx-auto mb-8"></div>
-    <div className="grid grid-cols-2 gap-4 mt-4 mx-auto w-full text-center">
+    <div className="grid grid-cols-2 gap-4 mt-4 mx-auto w-full text-center rounded-3xl">
       {testimonials.map((testimonial, index) => (
         <TestimonialCard key={index} {...testimonial} />
       ))}
