@@ -2,11 +2,12 @@
 
 import React from "react";
 
-const IconButton = ({ text, onClickFunction }) => {
+const IconButton = ({ text, onClick }) => {
   return (
     <div
-      onClick={onClickFunction}
-      className="h-10 w-10 rounded-lg bg-primary text-white flex justify-center items-center">
+      onClick={onClick}
+      className="h-10 w-10 rounded-md bg-primary text-white flex justify-center items-center"
+    >
       {text}
     </div>
   );

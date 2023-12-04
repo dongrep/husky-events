@@ -18,8 +18,9 @@ const BookingCard = ({ currentEvent }) => {
       </div>
       <div className="text-lg my-5 text-primary">Add to calendar</div>
       <PrimaryButton
-        onClickFunction={() => navigateToRegister()}
-        buttonWidth={"w-full "}>
+        onClick={() => navigateToRegister()}
+        buttonWidth={"w-full "}
+      >
         <div className="text-center">Book Now</div>
       </PrimaryButton>
       <div className="w-full text-center text-base mt-5 text-gray-500">
