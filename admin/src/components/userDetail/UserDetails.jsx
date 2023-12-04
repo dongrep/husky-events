@@ -33,7 +33,7 @@ const UserDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:8800/user/get/${userId}`);
+        const res = await axios.get(`http://localhost:8000/user/get/${userId}`);
         console.log("Hello    fetchData   res:", res);
         setUser(res.data);
       } catch (error) {
@@ -47,7 +47,7 @@ const UserDetails = () => {
   const onSubmit = async () => {
     try {
       const res = await axios.put(
-        `http://localhost:8800/user/edit/${userId}`,
+        `http://localhost:8000/user/edit/${userId}`,
         user
       );
       setShowUpdateToast(true);

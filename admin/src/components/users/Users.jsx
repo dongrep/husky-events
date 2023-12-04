@@ -12,10 +12,14 @@ import AlertModal from "../alertModal/AlertModal";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [paginatedUsers, setPaginatedUsers] = useState([]);
   const [input, setInput] = useState("");
   const [showDeleteToast, setShowDeleteToast] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteModalId, setDeleteModalId] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [paginatedData, setPaginatedData] = useState("");
+  const batchSize = 10;
 
   console.log("Hello    Users   input:", input);
 
@@ -27,8 +31,8 @@ const Users = () => {
     try {
       const res =
         input && input.length >= 3
-          ? await axios.get(`http://localhost:8800/user/getAll?q=${input}`)
-          : await axios.get("http://localhost:8800/user/getAll");
+          ? await axios.get(`http://localhost:8000/user/getAll?q=${input}`)
+          : await axios.get("http://localhost:8000/user/getAll");
       console.log("Hello    fetchData   res:", res);
       setUsers(res.data);
     } catch (error) {
@@ -37,15 +41,27 @@ const Users = () => {
     }
   };
 
+  useEffect(() => {
+    const startIndex = (pageNumber - 1) * batchSize;
+    const endIndex = startIndex + batchSize;
+    setPaginatedUsers(users.slice(startIndex, endIndex));
+    setPaginatedData(
+      `${startIndex + 1}-${Math.min(endIndex, users.length)} of ${users.length}`
+    );
+  }, [users, pageNumber]);
+
   const handleDelete = async (id) => {
     console.log("Hello    handleDelete   id:", id);
     try {
-      const res = await axios.delete(`http://localhost:8800/user/delete/${id}`);
+      const res = await axios.delete(`http://localhost:8000/user/delete/${id}`);
 
       // window.location.reload();
       // Refetch Data
       fetchData();
       setShowDeleteToast(true);
+      if ((pageNumber - 1) * batchSize + batchSize > users.length) {
+        setPageNumber(1);
+      }
 
       console.log("Hello    handleDelete   res:", res);
     } catch (error) {
@@ -89,7 +105,7 @@ const Users = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
+              {paginatedUsers.map((user) => (
                 <tr>
                   <td>
                     <div className="user">
@@ -117,6 +133,25 @@ const Users = () => {
               ))}
             </tbody>
           </table>
+          <div className="pagination">
+            <button
+              className={`addButton ${pageNumber === 1 && "disabled"}`}
+              disabled={pageNumber === 1}
+              onClick={() => setPageNumber(pageNumber - 1)}
+            >
+              Prev
+            </button>
+            <p>{paginatedData}</p>
+            <button
+              className={`addButton ${
+                pageNumber === Math.ceil(users.length / 10) && "disabled"
+              }`}
+              disabled={pageNumber === Math.ceil(users.length / 10)}
+              onClick={() => setPageNumber(pageNumber + 1)}
+            >
+              Next
+            </button>
+          </div>
           <Toast
             message={"User has been deleted"}
             show={showDeleteToast}

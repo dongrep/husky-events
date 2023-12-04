@@ -32,7 +32,7 @@ const AddUser = () => {
 
   const onSubmit = async () => {
     try {
-      const res = await axios.post("http://localhost:8800/user/create", info);
+      const res = await axios.post("http://localhost:8000/user/create", info);
       console.log("Hello    onSubmit   res:", res);
 
       setShowCreateToast(true);

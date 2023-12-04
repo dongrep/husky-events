@@ -3,6 +3,7 @@
   padding: 20px;
   border-radius: 10px;
   margin-top: 20px;
+  overflow-x: auto;
 }
 
 .top {
@@ -26,7 +27,7 @@
 
 .table td {
   padding: 10px;
-  word-break: break-all;
+  /* word-break: break-all; */
 }
 
 .user {

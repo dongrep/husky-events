@@ -1,78 +1,31 @@
 const express = require("express");
 const router = express.Router();
-const user = require("../Model/UserSchema");
-const { getPasswordHash, validateUserFields } = require("../helper");
 
-router.post("/create", (request, response) => {
-  const { name, email, password } = request.body;
+const {
+  deleteUser,
+  loginUser,
+  updateUser,
+  createUser,
+  getAllUsers,
+  getUser,
+} = require("../controller/userController");
 
-  if (!validateUserFields(response, name, email, password)) return;
+// Get  User
+router.get("/get/:userID", getUser);
 
-  const newUser = new user({
-    name,
-    email,
-    password: getPasswordHash(password),
-  });
+// Get All Users
+router.get("/getAll", getAllUsers);
 
-  newUser.save().then(
-    () => {
-      console.log("Entry added to users");
-      response.send("User created successfully");
-    },
-    (err) => console.log(err),
-  );
-});
+// Create User
+router.post("/create", createUser);
 
-router.put("/edit", async (request, response) => {
-  const { name, email, password } = request.body;
+// Update User
+router.put("/edit/:userID", updateUser);
 
-  if (!validateUserFields(response, name, email, password)) return;
+// Delete User
+router.delete("/delete/:userID", deleteUser);
 
-  let neededUser = await user.findOneAndUpdate(
-    { email: email },
-    { name, password: getPasswordHash(password) },
-  );
-
-  console.log(neededUser);
-
-  if (!neededUser) {
-    response.send("User not found!");
-  } else {
-    response.send(await user.findOne({ email: email }));
-  }
-});
-
-router.delete("/delete", async (request, response) => {
-  const { email } = request.body;
-
-  if (!email) {
-    response.status(400).send({ error: "Missing required fields" });
-    return;
-  }
-
-  let neededUser = await user.findOneAndDelete({ email: email });
-
-  if (!neededUser) {
-    response.send("User not found!");
-  } else {
-    response.send("User deleted successfully!");
-  }
-});
-
-router.get("/getAll", async (_, response) => {
-  response.send(await user.find());
-});
-
-router.get("/getUser", async (request, response) => {
-  const { email } = request.query;
-  console.log(email);
-  if (!email) {
-    response.json({ message: "invalid user" });
-    return;
-  }
-  let fetchedUser = await user.findOne({ email: email });
-  response.send(fetchedUser);
-});
-
+// Login User
+router.post("/login", loginUser);
 
 module.exports = router;
