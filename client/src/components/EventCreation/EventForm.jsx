@@ -55,7 +55,7 @@ const EventForm = () => {
     };
     try {
       const response = await axios.post(
-        `http://localhost:8000/event/create`,
+        `http://localhost:8800/event/create`,
         data,
       );
 
