@@ -23,7 +23,7 @@ const EventFilter = ({ selectedFilter, updateFilter }) => {
           id="search"
           value={selectedFilter}
           onChange={(e) => updateFilter(e.target.value)}
-          className="border w-full border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+          className="border w-full border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
           <option value="all">All</option>
           {allowedTags.map((tag, index) => (
             <option id={index} value={tag}>{tag}</option>

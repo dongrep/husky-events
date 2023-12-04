@@ -11,7 +11,7 @@ const BookingCard = ({ currentEvent }) => {
   };
 
   return (
-    <div className="rounded-md bg-white p-8 flex flex-col items-start">
+    <div className="rounded-lg bg-white p-8 flex flex-col items-start">
       <div className="text-2xl text-black">Date & Time</div>
       <div className="text-lg mt-5 text-gray-500">
         {formattedDate(currentEvent.scheduleTime)}

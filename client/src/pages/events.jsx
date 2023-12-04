@@ -54,10 +54,10 @@ const Events = () => {
         <Loader />
       ) : (
         <div className="relative w-full h-full">
-          <div className="relative w-full mt-4 mb-12 h-36 lg:h-[595px] bg-yellow-600 rounded-md overflow-hidden">
+          <div className="relative w-full mt-4 mb-12 h-36 lg:h-[595px] bg-yellow-600 rounded-lg overflow-hidden">
             <img
               src={"/hero.jpeg"}
-              className="rounded-md overflow-clip layout-fill object-cover w-full h-full"
+              className="rounded-lg overflow-clip layout-fill object-cover w-full h-full"
               alt="event"
             />
             <div className="absolute top-36 flex w-full justify-center text-white text-xl lg:text-4xl font-bold">
@@ -83,7 +83,7 @@ const Events = () => {
               <div className="flex justify-center mt-8">
                 <button
                   onClick={() => updateMaxEvents()}
-                  className="bg-primary text-white px-4 py-2 rounded-md">
+                  className="bg-primary text-white px-4 py-2 rounded-lg">
                   Show More
                 </button>
               </div>

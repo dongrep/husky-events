@@ -4,7 +4,7 @@ import EventInfoCard from "./EventInfoCard";
 
 const EventDetailsComponent = ({ currentEvent }) => {
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full shadow-lg shadow-gray-400">
       <div className="w-full mt-4 relative h-[255px] lg:h-[595px] rounded-t-md overflow-hidden">
         <img
           src={currentEvent.image}

@@ -35,7 +35,7 @@ const EventRegistration = () => {
               name="name"
               id="name"
               placeholder="Your name"
-              className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -46,7 +46,7 @@ const EventRegistration = () => {
               name="email"
               id="email"
               placeholder="Your email"
-              className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -57,7 +57,7 @@ const EventRegistration = () => {
               name="phone"
               id="phone"
               placeholder="Your phone number"
-              className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               onChange={(e) => setPhone(e.target.value)}
             />
           </div>
@@ -71,7 +71,7 @@ const EventRegistration = () => {
               max={10}
               id="noOfTickets"
               placeholder="Number of tickets"
-              className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               onChange={(e) => setTickets(e.target.value)}
             />
           </div>
@@ -79,7 +79,7 @@ const EventRegistration = () => {
         <div className="flex justify-center my-4">
           <button
             onClick={(e) => register(e)}
-            className="px-4 py-2 rounded-md bg-primary text-white">
+            className="px-4 py-2 rounded-lg bg-primary text-white">
             Register
           </button>
         </div>

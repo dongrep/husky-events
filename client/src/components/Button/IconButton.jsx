@@ -6,7 +6,7 @@ const IconButton = ({ text, onClickFunction }) => {
   return (
     <div
       onClick={onClickFunction}
-      className="h-10 w-10 rounded-md bg-primary text-white flex justify-center items-center">
+      className="h-10 w-10 rounded-lg bg-primary text-white flex justify-center items-center">
       {text}
     </div>
   );

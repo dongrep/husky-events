@@ -17,8 +17,8 @@ const EventCard = ({ event }) => {
     <div
       onClick={() => navigateToEventDetails()}
       className="cursor-pointer shadow-lg shadow-gray-300 w-[350px] bg-white rounded-lg p-5">
-      <div className="rounded-md relative">
-        {/* <div className="absolute overflow-clip rounded-md bg-secondaryYellowLight text-black top-3 left-3 p-2">
+      <div className="rounded-lg relative">
+        {/* <div className="absolute overflow-clip rounded-lg bg-secondaryYellowLight text-black top-3 left-3 p-2">
           Free
         </div> */}
         <div className="w-full h-[210px] overflow-hidden">

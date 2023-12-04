@@ -113,7 +113,7 @@ const EventForm = () => {
             <div className="flex w-1/2 flex-col space-y-1">
               <label htmlFor="scheduleTime">Start Time</label>
               <input
-                className="border border-gray-300 rounded-md p-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="border border-gray-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 type="datetime-local"
                 id="scheduleTime"
                 name="scheduleTime"
@@ -126,7 +126,7 @@ const EventForm = () => {
             <div className="flex w-1/2 flex-col space-y-1">
               <label htmlFor="scheduleTime">End Time</label>
               <input
-                className="border border-gray-300 rounded-md p-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="border border-gray-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 type="datetime-local"
                 id="scheduleTime"
                 name="scheduleTime"
@@ -145,7 +145,7 @@ const EventForm = () => {
               id="description"
               value={description}
               placeholder="Your description"
-              className="border border-gray-300 h-40 rounded-md p-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="border border-gray-300 h-40 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
@@ -190,7 +190,7 @@ const EventForm = () => {
         <div className="flex justify-center my-4">
           <button
             onClick={(e) => createEvent(e)}
-            className="px-4 py-2 rounded-md bg-primary text-white">
+            className="px-4 py-2 rounded-lg bg-primary text-white">
             Create Event
           </button>
         </div>
