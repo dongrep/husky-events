@@ -48,9 +48,9 @@ const About = () => {
     {/* Card Style component*/}
     <div className='w-full py-[10rem] px-4 bg-white'>
         <div className="col-12 text-center">
-            <h1 className="text-8xl font-semibold font-serif ">About Us</h1>
+            <h1 className="text-5xl font-semibold font-serif ">ABOUT US</h1>
             <div className="line h-1 w-20 bg-blue-300 my-4 mx-auto"></div>
-            <p className='text-5xl font-serif mb-6'>Howling Good Times: Unleash Memorable Moments with Husky Events!</p>
+            <p className='text-4xl font-serif mb-6'>Howling Good Times: Unleash Memorable Moments with Husky Events!</p>
         </div>
 
       <div className='max-w-[1240px] mx-auto grid md:grid-cols-3 gap-8'>
@@ -89,7 +89,7 @@ const About = () => {
     {/* Carousel */}
     <div className='w-full py-[10rem] justify-center text-center m-auto px-4 relative group'>
             <div>
-                <h1 className='text-8xl font-bold font-serif text-center'>Memory Collage</h1><br></br>
+                <h1 className='text-5xl font-bold font-serif text-center'>MEMORY COLLAGE</h1><br></br>
                 <div className="line h-1 w-20 bg-blue-300 my-4 mx-auto"></div>
                 <p className='text-3xl font- gap-2 text-center'> Empowering Your Campus Experience: Navigate, Discover, and Engage with Ease through the Husky Events.</p><br></br>   
             </div>

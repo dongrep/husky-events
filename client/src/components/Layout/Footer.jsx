@@ -16,7 +16,7 @@ const Footer = () => {
           <a href="/" className="text-base">
             Events
           </a>
-          <a href="/" className="text-base">
+          <a href="/about" className="text-base">
             About
           </a>
           <a href="/" className="text-base">

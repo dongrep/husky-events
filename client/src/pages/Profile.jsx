@@ -1,37 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import DefaultLayout from '../components/Layout/DefaultLayout';
 import EventCard from '../components/Event/ProfileInput';
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Profile = () => {
-  const [profileInfo, setProfileInfo] = useState({});
-  const [bookedEvents, setBookedEvents] = useState([]);
+  const [bookedEvents, setBookedEvents] = useState([
+    {
+      id: 1,
+      name: 'Event 1',
+      date: '2023-10-15',
+      time: '12:00',
+      location: 'Boston, MA',
+    },
+    {
+      id: 2,
+      name: 'Event 2',
+      date: '2023-12-20',
+      time: '12:00',
+      location: 'Boston, MA',
+    },
+  ]);
+
+  const { email } = useParams();
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(
+    {
+      name: 'John Doe',
+      email: 'johndoe@gmail.com',
+      nuid: '001234567',
+      location: 'Boston, MA',
+    },
+  );
+
+  const fetchEvent = async () => {
+    setLoading(true);
+    const response = await axios.get(
+      `http://localhost:8000/event/getUser?_email=${email}`,
+    );
+    const data = await response.data;
+    console.log(data);
+    setUser(data);
+    setBookedEvents(data);
+    setLoading(false);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/user/getUser?_id=${id}');
-        const data = await response.json();
-        const { user, bookedEvents } = data;
-
-        setProfileInfo(user);
-        setBookedEvents(bookedEvents);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+    if (user) return;
+    fetchEvent();
+  }, [loading, user]);
 
   return (
     <DefaultLayout>
-      <div className="bg-zinc-200 w-screen grid grid-flow-row items-center justify-center mb-6 mt-6 shadow-md">
+      <div className="bg-zinc-200 w-full grid grid-flow-row items-center justify-center mb-6 mt-6 shadow-md">
         <div className="bg-white p-10 rounded-md shadow-md">
-          <h1 className="text-3xl font-bold mb-2 text-center font-serif">{profileInfo.name}</h1>
-          <p className="text-gray-500 mb-4">{profileInfo.role}</p>
+          <h1 className="text-3xl font-bold mb-2 text-center font-serif">{user.name}</h1>
+          <p className="text-gray-500 mb-4"></p>
 
           {/* Profile Information */}
           <div className="mb-4 font-light">
@@ -41,13 +65,13 @@ const Profile = () => {
             </div>
             <ul className="text-xl list-disc pl-4 mt-4 font-sans">
               <li>
-                <span style={{ fontWeight: 'bold' }}>Email:</span> {profileInfo.email}
+                <span>Email: {user.email}</span>
               </li>
               <li>
-                <span style={{ fontWeight: 'bold' }}>NUID:</span> {profileInfo.NUID}
+                <span>NUID: {user.nuid}</span> 
               </li>
               <li>
-                <span style={{ fontWeight: 'bold' }}>Location:</span> {profileInfo.location}
+                <span>Location: {user.location}</span> 
               </li>
             </ul>
           </div>
