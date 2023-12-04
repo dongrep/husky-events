@@ -7,10 +7,15 @@
   justify-content: space-between;
 }
 
-.title {
+.navbar-container .mobile {
+  display: none;
+}
+
+.logo-title {
   color: var(--textSoft);
   font-weight: bold;
   text-transform: capitalize;
+  font-size: 25px;
 }
 
 .menu {
@@ -37,4 +42,20 @@
 .icons {
   display: flex;
   gap: 20px;
+}
+
+.navbar-container .mobile {
+  display: none;
+  color: var(--text);
+}
+
+@media (max-width: 500px) {
+  .navbar-container .mobile {
+    display: block;
+    color: var(--text);
+  }
+
+  .logo-title {
+    font-size: 20px;
+  }
 }

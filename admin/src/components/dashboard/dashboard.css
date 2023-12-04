@@ -9,6 +9,10 @@
   min-height: 100vh;
 }
 
+.mobile {
+  display: none;
+}
+
 .content {
   flex: 4;
   padding: 20px;
@@ -38,19 +42,33 @@
 .side {
   flex: 1;
 }
-/* 
+
 @media (max-width: 860px) {
   .sidebar {
-    display: none;
+    font-size: 12px;
   }
 
   .dashboard-container {
-    height: 100%;
+    font-size: 12px;
   }
-} */
+}
 
 @media (max-width: 500px) {
   .content {
     padding: 8px;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+    z-index: 2;
+    color: white;
+  }
+
+  .cards {
+    flex-direction: column;
   }
 }

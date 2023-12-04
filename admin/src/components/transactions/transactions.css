@@ -2,6 +2,7 @@
   background-color: var(--bgSoft);
   padding: 20px;
   border-radius: 10px;
+  overflow-x: auto;
 }
 
 .title {
