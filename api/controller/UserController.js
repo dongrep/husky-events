@@ -1,5 +1,6 @@
 const Users = require("../Model/UserSchema");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // Get All Users
 const getAllUsers = async (req, res) => {
@@ -102,7 +103,16 @@ const loginUser = async (req, res) => {
       throw new Error("Email or password is incorrect");
     }
 
-    res.status(200).json("User has been logged in successfully");
+    const token = jwt.sign(
+      { id: user._id, isAdmin: user.role === "admin" },
+      process.env.JWT
+    );
+    const { password, ...otherDetails } = user._doc;
+
+    res
+      .cookie("access_token", token, { httpOnly: true })
+      .status(200)
+      .json({ details: { ...otherDetails } });
   } catch (error) {
     console.log("Hello    app.delete   error:", error);
     res.status(500).send({ statusCode: 500, errorMssg: error.message });

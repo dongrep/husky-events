@@ -15,7 +15,7 @@ const Events = () => {
 
   const fetchEvents = async () => {
     setLoading(true);
-    const response = await axios.get("http://localhost:8800/event/events");
+    const response = await axios.get("http://localhost:8000/event/events");
     const data = await response.data;
     console.log(data);
     setEvents(data);
@@ -39,7 +39,7 @@ const Events = () => {
       return;
     }
     const filteredEvents = events.filter((event) =>
-      event.tags.includes(filter),
+      event.tags.includes(filter)
     );
     setFilteredEvents(filteredEvents);
   }, [filter, events]);
@@ -83,7 +83,8 @@ const Events = () => {
               <div className="flex justify-center mt-8">
                 <button
                   onClick={() => updateMaxEvents()}
-                  className="bg-primary text-white px-4 py-2 rounded-md">
+                  className="bg-primary text-white px-4 py-2 rounded-md"
+                >
                   Show More
                 </button>
               </div>

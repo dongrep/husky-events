@@ -55,8 +55,8 @@ const EventForm = () => {
     };
     try {
       const response = await axios.post(
-        `http://localhost:8800/event/create`,
-        data,
+        `http://localhost:8000/event/create`,
+        data
       );
 
       if (response.status === 204) {
@@ -95,7 +95,8 @@ const EventForm = () => {
   return (
     <div
       onClick={() => updateModals()}
-      className="flex flex-col justify-center rounded-lg p-8 mx-4 my-12 shadow-2xl shadow-gray-700">
+      className="flex flex-col justify-center rounded-lg p-8 mx-4 my-12 shadow-2xl shadow-gray-700"
+    >
       {error && <Modal title="Error" message={showMessage} />}
       {success && <Modal title="Success" message={showMessage} />}
       <div className="text-2xl font-semibold my-4">Create Event</div>
@@ -190,7 +191,8 @@ const EventForm = () => {
         <div className="flex justify-center my-4">
           <button
             onClick={(e) => createEvent(e)}
-            className="px-4 py-2 rounded-md bg-primary text-white">
+            className="px-4 py-2 rounded-md bg-primary text-white"
+          >
             Create Event
           </button>
         </div>

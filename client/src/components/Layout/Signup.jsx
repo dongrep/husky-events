@@ -1,55 +1,58 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import PrimaryButton from "../Button/PrimaryButton";
-import { performAllValidation } from '../../services/helper';
+import { performAllValidation } from "../../services/helper";
 
 export default function Signup() {
-
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    phone: '',
-    role: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+    role: "",
   });
 
   // Function to handle form submission
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [showErrorMessage, setShowErrorMessage] = useState('');
+  const [showErrorMessage, setShowErrorMessage] = useState("");
   const handleSignup = async () => {
     try {
-      const response = await fetch('http://localhost:3002/user/signup', {
-        method: 'POST',
+      performAllValidation({ body: formData });
+
+      const response = await fetch("http://localhost:8000/user/create", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
-      performAllValidation({ body: formData });
-
       const data = await response.json();
 
       if (response.ok) {
-        setShowSuccessMessage('User created successfully');
+        setShowSuccessMessage("User created successfully");
         setTimeout(() => {
           setShowSuccessMessage(false);
-          navigate('/login');
+          navigate("/login");
         }, 2000);
-        
+
         // Redirect or perform any other action on successful signup
       } else {
         console.error(`Error: ${data.message}`);
-        setShowErrorMessage('Signup failed. Please check your information and try again.');
+        setShowErrorMessage(
+          "Signup failed. Please check your information and try again."
+        );
         // Handle error, show message to the user, etc.
       }
     } catch (error) {
-      console.error('Error:', error);
-      setShowErrorMessage('An unexpected error occurred. Please try again later.');
+      console.error("Error:", error);
+      setShowErrorMessage(
+        "An unexpected error occurred. Please try again later."
+      );
       // Handle network errors or other exceptions
     }
   };
@@ -60,7 +63,7 @@ export default function Signup() {
       [e.target.id]: e.target.value,
     });
   };
- return (
+  return (
     <div id="NewRootRoot" className="flex flex-row w-full items-start">
       <div className="bg-[rgba(19,_19,_21,_0.3)] flex flex-row w-full items-start">
         <div
@@ -74,7 +77,10 @@ export default function Signup() {
             To keep connected with us, provide us with your information
           </div>
           <Link to="/login">
-            <PrimaryButton id="Button1" className="bg-[#7848f4] text-white font-bold py-2 px-4 rounded-full">
+            <PrimaryButton
+              id="Button1"
+              className="bg-[#7848f4] text-white font-bold py-2 px-4 rounded-full"
+            >
               Sign In
             </PrimaryButton>
           </Link>
@@ -133,7 +139,9 @@ export default function Signup() {
             />
           </div>
           <div className="flex flex-col gap-4 w-full items-start">
-            <div className="font-['Product_Sans'] uppercase">CONFIRM PASSWORD</div>
+            <div className="font-['Product_Sans'] uppercase">
+              CONFIRM PASSWORD
+            </div>
             <input
               type="password"
               id="confirmPassword"
@@ -171,28 +179,28 @@ export default function Signup() {
               Sign Up
             </button>
             {showSuccessMessage && (
-          <div className="bg-green-200 p-4 rounded fixed  top-0 right-0 mt-4 mr-4">
-            <p className="text-green-800">User created successfully</p>
-            <button
-              className="text-sm text-gray-600 cursor-pointer focus:outline-none"
-              onClick={() => setShowSuccessMessage(false)}
-            >
-              &#10006; {/* Unicode character for the 'X' cross */}
-            </button>
-          </div>
-        )}
+              <div className="bg-green-200 p-4 rounded fixed  top-0 right-0 mt-4 mr-4">
+                <p className="text-green-800">User created successfully</p>
+                <button
+                  className="text-sm text-gray-600 cursor-pointer focus:outline-none"
+                  onClick={() => setShowSuccessMessage(false)}
+                >
+                  &#10006; {/* Unicode character for the 'X' cross */}
+                </button>
+              </div>
+            )}
 
-        {showErrorMessage && (
-        <div className="bg-red-200 p-4 rounded fixed top-0 right-0 mt-4 mr-4">
-          <p className="text-red-800">{showErrorMessage}</p>
-          <button
-            className="text-sm text-gray-600 cursor-pointer focus:outline-none"
-            onClick={() => setShowErrorMessage('')}
-          >
-            &#10006; {/* Unicode character for the 'X' cross */}
-          </button>
-        </div>
-      )}
+            {showErrorMessage && (
+              <div className="bg-red-200 p-4 rounded fixed top-0 right-0 mt-4 mr-4">
+                <p className="text-red-800">{showErrorMessage}</p>
+                <button
+                  className="text-sm text-gray-600 cursor-pointer focus:outline-none"
+                  onClick={() => setShowErrorMessage("")}
+                >
+                  &#10006; {/* Unicode character for the 'X' cross */}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
