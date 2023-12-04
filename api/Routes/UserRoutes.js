@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const user = require("../Model/UserSchema");
-const { validateFields, getPasswordHash } = require("../helper");
+const { getPasswordHash, validateUserFields } = require("../helper");
 
 router.post("/create", (request, response) => {
   const { name, email, password } = request.body;
 
-  if (!validateFields(response, name, email, password)) return;
+  if (!validateUserFields(response, name, email, password)) return;
 
   const newUser = new user({
     name,
@@ -26,7 +26,7 @@ router.post("/create", (request, response) => {
 router.put("/edit", async (request, response) => {
   const { name, email, password } = request.body;
 
-  if (!validateFields(response, name, email, password)) return;
+  if (!validateUserFields(response, name, email, password)) return;
 
   let neededUser = await user.findOneAndUpdate(
     { email: email },

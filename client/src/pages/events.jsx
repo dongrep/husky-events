@@ -1,5 +1,5 @@
 import DefaultLayout from "../components/Layout/DefaultLayout";
-import EventSearch from "../components/Event/EventSearch";
+import EventFilter from "../components/Event/EventFilter";
 import EventCard from "../components/Event/EventCard";
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
@@ -8,6 +8,10 @@ import axios from "axios";
 const Events = () => {
   const [loading, setLoading] = useState(true);
   const [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
+  const [maxEvents, setMaxEvents] = useState(6);
+  const [showMoreEvents, setShowMoreEvents] = useState(false);
+  const [filter, setFilter] = useState("");
 
   const fetchEvents = async () => {
     setLoading(true);
@@ -15,13 +19,34 @@ const Events = () => {
     const data = await response.data;
     console.log(data);
     setEvents(data);
+    setFilteredEvents(data);
     setLoading(false);
   };
 
   useEffect(() => {
-    if (events.length > 0) return;
+    if (filteredEvents.length > 6) {
+      setShowMoreEvents(true);
+    }
+  }, [events]);
+
+  useEffect(() => {
     fetchEvents();
-  }, [loading, events]);
+  }, []);
+
+  useEffect(() => {
+    if (filter === "all") {
+      setFilteredEvents([...events]);
+      return;
+    }
+    const filteredEvents = events.filter((event) =>
+      event.tags.includes(filter),
+    );
+    setFilteredEvents(filteredEvents);
+  }, [filter]);
+
+  const updateMaxEvents = () => {
+    setMaxEvents(maxEvents + 6);
+  };
 
   return (
     <DefaultLayout>
@@ -29,7 +54,7 @@ const Events = () => {
         <Loader />
       ) : (
         <div className="relative w-full h-full">
-          <div className="w-full mt-4 mb-12 relative h-36 lg:h-[595px] bg-yellow-600 rounded-md overflow-hidden">
+          <div className="relative w-full mt-4 mb-12 h-36 lg:h-[595px] bg-yellow-600 rounded-md overflow-hidden">
             <img
               src={"/hero.jpeg"}
               className="rounded-md overflow-clip layout-fill object-cover w-full h-full"
@@ -42,18 +67,27 @@ const Events = () => {
               </div>
             </div>
           </div>
-          <div className="absolute lg:flex top-[50%] hidden w-full justify-center">
-            <EventSearch />
+          <div className="lg:flex w-full justify-center">
+            <EventFilter selectedFilter={filter} updateFilter={setFilter} />
           </div>
           <div className="lg:px-16 my-4 lg:my-24 ">
             <div className="text-lg font-semibold mb-6 mx-4">
               Upcoming <span className="text-primary">Events</span>
             </div>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-y-4 gap-x-5 grid-cols-1 justify-between">
-              {events.map((event, index) => (
+              {filteredEvents.slice(0, maxEvents).map((event, index) => (
                 <EventCard key={event.name + index} event={event} />
               ))}
             </div>
+            {showMoreEvents && (
+              <div className="flex justify-center mt-8">
+                <button
+                  onClick={() => updateMaxEvents()}
+                  className="bg-primary text-white px-4 py-2 rounded-md">
+                  Show More
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
