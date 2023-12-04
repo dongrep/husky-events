@@ -14,7 +14,7 @@ const EventDetails = () => {
   const fetchEvent = async () => {
     setLoading(true);
     const response = await axios.get(
-      `http://localhost:8000/event/getevent?_id=${id}`,
+      `http://localhost:8800/event/getevent?_id=${id}`,
     );
     const data = await response.data;
     console.log(data);
