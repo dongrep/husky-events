@@ -27,8 +27,10 @@ router.post("/create", (request, response) => {
       image,
       tags
     )
-  )
+  ) {
+    response.status(204).send("Missing required fields");
     return;
+  }
 
   //check if event already exists by name
   let existingEvent = event.findOne({ name: name });
@@ -52,7 +54,7 @@ router.post("/create", (request, response) => {
     () => {
       response.send("Event created successfully");
     },
-    (err) => response.send(err)
+    (err) => response.status(400).send({ message: err })
   );
 });
 
