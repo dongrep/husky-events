@@ -5,7 +5,7 @@ import PrimaryButton from "../Button/PrimaryButton";
 
 const EventInfoCard = ({currentEvent}) => {
   return (
-    <div className="w-96 h-full flex flex-col justify-center items-start">
+    <div className="mx-7 h-full flex flex-col justify-center items-start">
       <PrimaryButton>
         <div className="flex items-center gap-2 text-sm">
           <IoIosArrowBack className="h-3 w-3 text-white" />

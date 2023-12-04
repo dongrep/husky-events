@@ -47,7 +47,7 @@ const validateEventFields = (
     !image ||
     !tags
   ) {
-    response.status(400).send({ error: "Missing required fields" });
+    // response.status(400).send({ message: "Missing required fields" });
     return false;
   }
   return true;

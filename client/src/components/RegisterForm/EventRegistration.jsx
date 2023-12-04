@@ -22,7 +22,7 @@ const EventRegistration = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center rounded-lg p-8 mx-4 my-12 shadow-2xl shadow-gray-700">
       <div className="text-2xl font-semibold my-4">
         Register : {currentEvent.name}
       </div>
