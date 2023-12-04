@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./global.css";
 import RegistrationForm from "./pages/RegistrationForm";
 import { EventProvider } from "./context/useEventContext";
-import Events from "./pages/events";
+import Events from "./pages/Events";
 import EventDetails from "./pages/EventDetails";
 import EventCreation from "./pages/EventCreation";
 
