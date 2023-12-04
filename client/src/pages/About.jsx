@@ -46,7 +46,7 @@ const About = () => {
   return (
     <DefaultLayout>
     {/* Card Style component*/}
-    <div className='w-screen py-[10rem] px-4 bg-white'>
+    <div className='w-full py-[10rem] px-4 bg-white'>
         <div className="col-12 text-center">
             <h1 className="text-8xl font-semibold font-serif ">About Us</h1>
             <div className="line h-1 w-20 bg-blue-300 my-4 mx-auto"></div>
@@ -87,7 +87,7 @@ const About = () => {
       </div>
     </div>
     {/* Carousel */}
-    <div className='w-screen py-[10rem] justify-center text-center m-auto px-4 relative group'>
+    <div className='w-full py-[10rem] justify-center text-center m-auto px-4 relative group'>
             <div>
                 <h1 className='text-8xl font-bold font-serif text-center'>Memory Collage</h1><br></br>
                 <div className="line h-1 w-20 bg-blue-300 my-4 mx-auto"></div>
@@ -122,7 +122,7 @@ const About = () => {
         </div>
     </div>
     {/* Counter */}
-    <div className="relative flex flex-wrap justify-center gap-32 font-serif text-3xl w-screen">
+    <div className="relative flex flex-wrap justify-center gap-32 font-serif text-3xl w-full">
         <img
         src={"/counter.jpg"}
         className="absolute inset-0 object-cover w-full h-[120px] bg-blue-400 bg-opacity-200 bg-origin-content justify-center"
@@ -144,7 +144,7 @@ const About = () => {
             <h1 className="text-white display-4">58+</h1>
             <h6 className="text-uppercase mb-0 mt-3 text-white">Team Members</h6>
         </div>
-    </div>
+      </div>
     <Testimonial />
     <Contact />
     </DefaultLayout>

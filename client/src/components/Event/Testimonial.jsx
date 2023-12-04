@@ -43,7 +43,7 @@ const Testimonial = () => {
   ];
 
   return (
-    <div className=' w-full ml-96'>
+    <div className=' w-full'>
     <h2 className='text-5xl text-center text-gray-900 mb-4 mt-24'>
       MESSAGE FROM OUR PROFESSORS
     </h2>

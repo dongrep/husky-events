@@ -10,7 +10,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/user/getUser?dongrep@northeastern.edu');
+        const response = await fetch('http://localhost:8000/user/getUser?_id=${id}');
         const data = await response.json();
         const { user, bookedEvents } = data;
 
@@ -30,11 +30,6 @@ const Profile = () => {
     <DefaultLayout>
       <div className="bg-zinc-200 w-screen grid grid-flow-row items-center justify-center mb-6 mt-6 shadow-md">
         <div className="bg-white p-10 rounded-md shadow-md">
-          <img
-            src={profileInfo.gender === 'Male' ? './Male.jpg' : './Female.jpg'}
-            alt="Profile"
-            className="rounded-full mx-auto mb-4 h-44"
-          />
           <h1 className="text-3xl font-bold mb-2 text-center font-serif">{profileInfo.name}</h1>
           <p className="text-gray-500 mb-4">{profileInfo.role}</p>
 
