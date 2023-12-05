@@ -7,6 +7,7 @@ import EventDetails from "./pages/EventDetails";
 import EventCreation from "./pages/EventCreation";
 import Login from "./components/Layout/Login";
 import Signup from "./components/Layout/Signup";
+import NotFound from "./pages/404";
 
 function App() {
   return (
@@ -17,11 +18,11 @@ function App() {
           <Route path="event/:id" element={<EventDetails />}></Route>
           <Route
             path="event/:id/register"
-            element={<RegistrationForm />}
-          ></Route>
+            element={<RegistrationForm />}></Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/create-event" element={<EventCreation />}></Route>
+          <Route path="/*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
     </EventProvider>

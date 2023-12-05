@@ -35,14 +35,14 @@ const Events = () => {
 
   useEffect(() => {
     if (filter === "all") {
-      setFilteredEvents(events);
+      setFilteredEvents([...events]);
       return;
     }
     const filteredEvents = events.filter((event) =>
-      event.tags.includes(filter)
+      event.tags.includes(filter),
     );
     setFilteredEvents(filteredEvents);
-  }, [filter, events]);
+  }, [filter]);
 
   const updateMaxEvents = () => {
     setMaxEvents(maxEvents + 6);
@@ -83,8 +83,7 @@ const Events = () => {
               <div className="flex justify-center mt-8">
                 <button
                   onClick={() => updateMaxEvents()}
-                  className="bg-primary text-white px-4 py-2 rounded-md"
-                >
+                  className="bg-primary text-white px-4 py-2 rounded-md">
                   Show More
                 </button>
               </div>
