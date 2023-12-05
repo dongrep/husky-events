@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const event = require("../Model/EventSchema");
+const user = require("../Model/UserSchema");
 const { validateEventFields } = require("../helper");
 
 router.post("/create", (request, response) => {
@@ -25,7 +26,7 @@ router.post("/create", (request, response) => {
       duration,
       location,
       image,
-      tags
+      tags,
     )
   ) {
     response.status(204).send("Missing required fields");
@@ -54,7 +55,7 @@ router.post("/create", (request, response) => {
     () => {
       response.send("Event created successfully");
     },
-    (err) => response.status(400).send({ message: err })
+    (err) => response.status(400).send({ message: err }),
   );
 });
 
@@ -87,7 +88,7 @@ router.put("/edit", async (request, response) => {
       location,
       image,
       tags,
-    }
+    },
   );
 
   if (!neededEvent) {
@@ -151,6 +152,32 @@ router.get("/getevent", async (request, response) => {
     response.send("Event not found!");
   } else {
     response.send(neededEvent);
+  }
+});
+
+router.put("/register", async (request, response) => {
+  const { eventID, userID } = request.body;
+
+  if (!eventID || !userID) {
+    response.status(400).send({ error: "Missing required fields" });
+    return;
+  }
+
+  let neededEvent = await event.findOne({ _id: eventID });
+  let neededUser = await user.findOne({ _id: userID });
+
+  if (!neededEvent) {
+    response.send("Event not found!");
+  } else if (!neededUser) {
+    response.send("User not found!");
+  } else if (neededEvent.attendees.includes(userID)) {
+    response.send("User already registered!");
+  } else {
+    neededEvent.attendees.push(userID);
+    neededUser.registeredEvents.push(eventID);
+    neededEvent.save();
+    neededUser.save();
+    response.send("User registered successfully!");
   }
 });
 

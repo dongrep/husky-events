@@ -9,6 +9,7 @@ const eventSchema = new mongoose.Schema({
     location: String,
     image: String,
     tags: [String],
+    attendees: [String],
   });
 
 module.exports = mongoose.model("events", eventSchema);

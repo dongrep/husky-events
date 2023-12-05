@@ -38,6 +38,12 @@ const AuthReducer = (state, action) => {
         loading: false,
         error: null,
       };
+    case "REFRESH":
+      return {
+        user: action.payload,
+        loading: false,
+        error: null,
+      };
     default:
       return state;
   }
@@ -57,6 +63,9 @@ export const AuthContextProvider = ({ children }) => {
         loading: state.loading,
         error: state.error,
         dispatch,
+        refresh : () => {
+          
+        }
       }}
     >
       {children}
