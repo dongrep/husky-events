@@ -4,6 +4,8 @@ import EventCard from "../components/Event/EventCard";
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import axios from "axios";
+import { AuthContext } from "../context/authContext";
+import { useContext } from "react";
 
 const Events = () => {
   const [loading, setLoading] = useState(true);
@@ -12,6 +14,7 @@ const Events = () => {
   const [maxEvents, setMaxEvents] = useState(6);
   const [showMoreEvents, setShowMoreEvents] = useState(false);
   const [filter, setFilter] = useState("");
+  const { user, refreshUser } = useContext(AuthContext);
 
   const fetchEvents = async () => {
     setLoading(true);
@@ -39,7 +42,7 @@ const Events = () => {
       return;
     }
     const filteredEvents = events.filter((event) =>
-      event.tags.includes(filter),
+      event.tags.includes(filter)
     );
     setFilteredEvents(filteredEvents);
   }, [filter, events]);
@@ -83,7 +86,8 @@ const Events = () => {
               <div className="flex justify-center mt-8">
                 <button
                   onClick={() => updateMaxEvents()}
-                  className="bg-primary text-white px-4 py-2 rounded-md">
+                  className="bg-primary text-white px-4 py-2 rounded-md"
+                >
                   Show More
                 </button>
               </div>

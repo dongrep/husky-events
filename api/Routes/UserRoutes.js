@@ -8,10 +8,15 @@ const {
   createUser,
   getAllUsers,
   getUser,
+  getUsersCount,
+  getUserByToken,
 } = require("../controller/userController");
 
 // Get  User
 router.get("/get/:userID", getUser);
+
+// Get  User by Token
+router.get("/getUser/:token", getUserByToken);
 
 // Get All Users
 router.get("/getAll", getAllUsers);
@@ -27,5 +32,8 @@ router.delete("/delete/:userID", deleteUser);
 
 // Login User
 router.post("/login", loginUser);
+
+// COUNT User
+router.get("/count", getUsersCount);
 
 module.exports = router;

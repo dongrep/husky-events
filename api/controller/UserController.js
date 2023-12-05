@@ -1,5 +1,6 @@
 const Users = require("../Model/UserSchema");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // Get All Users
 const getAllUsers = async (req, res) => {
@@ -27,6 +28,23 @@ const getAllUsers = async (req, res) => {
 const getUser = async (req, res) => {
   const user = await Users.findById(req.params.userID);
   res.status(200).json(user);
+};
+
+const getUserByToken = async (req, res) => {
+  try {
+    const token = req.params.token;
+    const decodedToken = jwt.verify(token, process.env.JWT);
+    const user = await Users.findById(decodedToken.id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
 
 // Create User
@@ -102,11 +120,29 @@ const loginUser = async (req, res) => {
       throw new Error("Email or password is incorrect");
     }
 
-    res.status(200).json("User has been logged in successfully");
+    const token = jwt.sign(
+      { id: user._id, isAdmin: user.role === "admin" },
+      process.env.JWT,
+      {
+        expiresIn: "24h", // expires in 24 hours
+      }
+    );
+    const { password, ...otherDetails } = user._doc;
+
+    res
+      .cookie("access_token", token, { httpOnly: true })
+      .status(200)
+      .json({ details: { ...otherDetails, token } });
   } catch (error) {
     console.log("Hello    app.delete   error:", error);
     res.status(500).send({ statusCode: 500, errorMssg: error.message });
   }
+};
+
+const getUsersCount = async (req, res) => {
+  const userCount = await Users.countDocuments();
+
+  res.status(200).send({ userCount });
 };
 
 module.exports = {
@@ -116,4 +152,6 @@ module.exports = {
   updateUser,
   deleteUser,
   loginUser,
+  getUsersCount,
+  getUserByToken,
 };

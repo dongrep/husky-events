@@ -8,6 +8,9 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     phone: { type: String, required: true },
     role: { type: String, required: true },
+    profileImg: { type: String },
+    registeredEvents: { type: [String] },
+    yourEvents: { type: [String] },
   },
   { timestamps: true }
 );
