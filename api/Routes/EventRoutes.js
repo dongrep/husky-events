@@ -154,4 +154,11 @@ router.get("/getevent", async (request, response) => {
   }
 });
 
+// COUNT User
+router.get("/count", async (req, res) => {
+  const eventCount = await event.countDocuments();
+
+  res.status(200).send({ eventCount });
+});
+
 module.exports = router;
