@@ -13,38 +13,6 @@ export default function Login() {
   });
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
-  // const handleLogin = async () => {
-  //   try {
-  //     // const response = await fetch("http://localhost:8000/user/login", {
-  //     //   method: "POST",
-  //     //   headers: {
-  //     //     "Content-Type": "application/json",
-  //     //   },
-  //     //   body: JSON.stringify(formData),
-  //     // });
-  //     // const data = await response.json();
-  //     // if (response.ok) {
-  //     //   // Login successful
-  //     //   console.log("Login successful:", data.user);
-  //     //   setShowSuccessMessage("User successfully logged in!");
-  //     //   setTimeout(() => {
-  //     //     setShowSuccessMessage(false);
-  //     //     navigate("/");
-  //     //   }, 2000);
-  //     // Redirect or perform other actions upon successful login
-  //     // } else {
-  //     //   console.error(`Login failed: ${data.message}`);
-  //     //   setShowErrorMessage("Invalid email or password. Please try again.");
-  //     //   // Show error message for a certain duration (e.g., 5 seconds)
-  //     //   setTimeout(() => {
-  //     //     setShowErrorMessage(false);
-  //     //   }, 3000);
-  //     // }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     // Handle network errors or other exceptions
-  //   }
-  // };
 
   const handleInputChange = (e) => {
     setFormData({
@@ -61,34 +29,21 @@ export default function Login() {
         "http://localhost:8000/user/login",
         formData
       );
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+      localStorage.setItem("token", res?.data?.details?.token);
+      dispatch({ type: "LOGIN_SUCCESS", payload: res?.data?.details });
 
-      const data = res;
+      const data = res?.data?.details;
       console.log("Hello    handleLogin   data:", data);
-      console.log("Hello    handleLogin   res:", res.ok);
-      if (res.statusText === "OK") {
-        // Login successful
-        console.log("Login successful:", data.user);
 
+      if (res.status === 200) {
         setShowSuccessMessage("User successfully logged in!");
         setTimeout(() => {
           setShowSuccessMessage(false);
           navigate("/");
         }, 2000);
-      } else {
-        console.error(`Login failed: ${data.errorMssg}`);
-
-        setShowErrorMessage("Invalid email or password. Please try again.");
-        // Show error message for a certain duration (e.g., 5 seconds)
-        setTimeout(() => {
-          setShowErrorMessage(false);
-        }, 3000);
-
-        // Redirect or perform other actions upon successful login
       }
-      // navigate("/");
     } catch (err) {
-      console.log("Hello    handleLogin   err:", err);
+      console.error(err);
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
       setShowErrorMessage(
         err?.response?.data?.errorMssg || "Something went wrong!"
@@ -96,7 +51,7 @@ export default function Login() {
     }
   };
 
-  const { loading, error, dispatch } = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext);
 
   return (
     <div

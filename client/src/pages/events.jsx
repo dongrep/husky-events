@@ -4,6 +4,8 @@ import EventCard from "../components/Event/EventCard";
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import axios from "axios";
+import { AuthContext } from "../context/authContext";
+import { useContext } from "react";
 
 const Events = () => {
   const [loading, setLoading] = useState(true);
@@ -12,6 +14,7 @@ const Events = () => {
   const [maxEvents, setMaxEvents] = useState(6);
   const [showMoreEvents, setShowMoreEvents] = useState(false);
   const [filter, setFilter] = useState("");
+  const { user, refreshUser } = useContext(AuthContext);
 
   const fetchEvents = async () => {
     setLoading(true);
