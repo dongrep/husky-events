@@ -25,10 +25,10 @@ router.post("/create", (request, response) => {
       duration,
       location,
       image,
-      tags,
+      tags
     )
   ) {
-    response.status(204).send( "Missing required fields" );
+    response.status(204).send("Missing required fields");
     return;
   }
 
@@ -54,7 +54,7 @@ router.post("/create", (request, response) => {
     () => {
       response.send("Event created successfully");
     },
-    (err) => response.status(400).send({ message: err }),
+    (err) => response.status(400).send({ message: err })
   );
 });
 
@@ -87,7 +87,7 @@ router.put("/edit", async (request, response) => {
       location,
       image,
       tags,
-    },
+    }
   );
 
   if (!neededEvent) {
@@ -98,7 +98,9 @@ router.put("/edit", async (request, response) => {
 });
 
 router.delete("/delete", async (request, response) => {
-  const { _id } = request.body;
+  const { _id } = request.query;
+  console.log("Hello    router.delete   request.body:", request.body);
+  console.log("Hello    router.delete   _id:", _id);
 
   if (!_id) {
     response.status(400).send({ error: "Missing required fields" });
@@ -114,8 +116,25 @@ router.delete("/delete", async (request, response) => {
   }
 });
 
-router.get("/events", async (_, response) => {
-  response.send(await event.find());
+router.get("/events", async (request, response) => {
+  const searchQuery = request.query.q;
+
+  if (searchQuery) {
+    const regex = new RegExp(searchQuery, "i");
+    console.log("Hello    getAllUsers   searchQuery:", searchQuery);
+    const events = await event.find({
+      $or: [
+        { name: { $regex: regex } },
+        { location: { $regex: regex } },
+        { organizationID: { $regex: regex } },
+      ],
+    });
+    response.status(200).json(events);
+  } else {
+    const events = await event.find();
+    response.status(200).json(events);
+  }
+  /*response.send(await event.find());*/
 });
 
 router.get("/getevent", async (request, response) => {
