@@ -8,6 +8,7 @@ import Navbar from "../navbar/Navbar";
 import Sidebar from "../sidebar/Sidebar";
 import "./addUser.css";
 import Toast from "../toast/Toast";
+import performAllValidation from "../../helper";
 
 const AddUser = () => {
   const INITIAL_STATE = {
@@ -23,8 +24,7 @@ const AddUser = () => {
 
   const [info, setInfo] = useState(INITIAL_STATE);
   const [showCreateToast, setShowCreateToast] = useState(false);
-
-  console.log("Hello    AddUser   info:", info);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -32,16 +32,18 @@ const AddUser = () => {
 
   const onSubmit = async () => {
     try {
+      performAllValidation({ body: info });
       const res = await axios.post("http://localhost:8000/user/create", info);
-      console.log("Hello    onSubmit   res:", res);
 
       setShowCreateToast(true);
+      setError(null);
 
       setTimeout(() => {
         navigate("/users");
       }, 2000);
     } catch (error) {
-      console.log("Hello    onSubmit   error:", error);
+      setError(error.message);
+      console.error(error);
     }
   };
 
@@ -110,6 +112,7 @@ const AddUser = () => {
             </div>
           </div>
           <div className="buttonContainer">
+            <p style={{ color: "crimson" }}>{error}</p>
             <button className="createButton" onClick={onSubmit}>
               Create
             </button>
