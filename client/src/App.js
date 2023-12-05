@@ -7,6 +7,7 @@ import EventDetails from "./pages/EventDetails";
 import EventCreation from "./pages/EventCreation";
 import Profile from "./pages/Profile";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/create-event" element={<EventCreation />}></Route>
           <Route path="/about" element={<About />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
         </Routes>
       </BrowserRouter>
     </EventProvider>

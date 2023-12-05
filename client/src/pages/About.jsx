@@ -3,7 +3,6 @@ import DefaultLayout from '../components/Layout/DefaultLayout'
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 import { useState } from 'react';
 import { RxDotFilled } from 'react-icons/rx';
-import Contact from '../components/Layout/Contact';
 import Testimonial from '../components/Event/Testimonial';
 
 const About = () => {
@@ -146,7 +145,6 @@ const About = () => {
         </div>
       </div>
     <Testimonial />
-    <Contact />
     </DefaultLayout>
   )
 }
