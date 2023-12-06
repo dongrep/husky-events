@@ -22,12 +22,19 @@ const EventInfoCard = ({ currentEvent }) => {
         <div className="lg:text-base text-xs mt-5 text-white">
           {currentEvent.description}
         </div>
-        <div className="flex items-center gap-2 mt-5">
+        <Link
+          target="_blank"
+          to={currentEvent.locationUrl ?? ""}
+          className={"flex items-center gap-2 mt-5"}>
           <IoLocationOutline className="lg:h-5 lg:w-5 h-3 w-3 text-white" />
-          <span className="text-white lg:text-xl text-sm">
+          <span
+            className={
+              (currentEvent.locationUrl !== "" && "underline") +
+              " text-white lg:text-xl text-sm"
+            }>
             {currentEvent.location}
           </span>
-        </div>
+        </Link>
       </div>
     </div>
   );

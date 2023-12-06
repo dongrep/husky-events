@@ -11,11 +11,14 @@ const options = {
   year: "numeric",
   month: "short",
   day: "numeric",
-  hour: "numeric",
-  minute: "numeric",
-  hour12: true, // Use 12-hour clock
 };
 
 // Format the date using toLocaleString with the custom options
 export const formattedDate = (time) =>
   new Date(time).toLocaleString("en-US", options);
+
+export const formattedTime = (time) =>
+  new Date(time).toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+  });
