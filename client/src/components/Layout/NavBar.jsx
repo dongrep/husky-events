@@ -31,7 +31,9 @@ const NavBar = () => {
             </>
           ) : (
             <>
-              {`Hello, ${user.firstName}`}
+              <p className="text-gray-600 text-lg">
+                Welcome, <Link to="/profile" className="text-primary font-semibold hover:underline">{user.firstName}</Link>
+              </p>
               <PrimaryButton
                 onClick={() => {
                   localStorage.removeItem("token");
