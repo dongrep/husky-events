@@ -58,6 +58,7 @@ const BookingCard = ({ currentEvent, fetchEvent }) => {
         }, 2000);
         axios.post(`http://localhost:8000/payment/made`, {
           event,
+          userID: user._id
         })
           .then((response) => {
             if (response.data.url) {
@@ -66,7 +67,7 @@ const BookingCard = ({ currentEvent, fetchEvent }) => {
             
               window.location.href = response.data.url;
               
-              const bookingData = { event : currentEvent.name, userName : user.firstName, status : "Paid" };
+              const bookingData = { eventId : currentEvent._id, userId : user._id, status : "Paid", cost:0 };
               const res = axios.post(
                 "http://localhost:8000/payment/create",
                 bookingData
