@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const userRouter = require("./Routes/UserRoutes");
 const eventRouter = require("./Routes/EventRoutes");
+const paymentRouter = require("./Routes/PaymentRoutes");
 const app = express();
 
 require("dotenv").config();
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/user", userRouter);
 app.use("/event", eventRouter);
+app.use("/payment", paymentRouter);
 
 app.listen(PORT, () => {
   console.log("Listening on PORT: " + PORT);

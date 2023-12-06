@@ -10,6 +10,8 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./components/Layout/Login";
 import Signup from "./components/Layout/Signup";
+import PaymentSuccess from "./components/Layout/Success";
+import PaymentFailed from "./components/Layout/Failed";
 import NotFound from "./pages/404";
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
           <Route path="/create-event" element={<EventCreation />}></Route>
           <Route path="/*" element={<NotFound />}></Route>
           <Route path="/about" element={<About />}></Route>
+          <Route path="/success" element={<PaymentSuccess />}></Route>
+          <Route path="/failed" element={<PaymentFailed />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
         </Routes>
