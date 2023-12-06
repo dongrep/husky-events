@@ -27,25 +27,24 @@ const validateUserFields = (response, name, email, password) => {
 };
 
 const validateEventFields = (
-  response,
   name,
   description,
   organizer,
-  scheduleTime,
-  duration,
+  startTime,
+  endTime,
+  cost,
   location,
-  image,
-  tags,
+  image
 ) => {
   if (
     !name ||
     !description ||
     !organizer ||
-    !scheduleTime ||
-    !duration ||
+    !startTime ||
+    !endTime ||
+    !cost ||
     !location ||
-    !image ||
-    !tags
+    !image
   ) {
     // response.status(400).send({ message: "Missing required fields" });
     return false;

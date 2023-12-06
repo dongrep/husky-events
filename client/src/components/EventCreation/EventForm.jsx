@@ -21,6 +21,7 @@ const EventForm = () => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [location, setLocation] = useState("");
+  const [locationUrl, setLocationUrl] = useState("");
   const [image, setImage] = useState("");
   const [tags, setTags] = useState([]);
 
@@ -51,12 +52,13 @@ const EventForm = () => {
       endTime: endTime,
       location: location,
       image: image,
+      locationUrl: locationUrl,
       tags: tags,
     };
     try {
       const response = await axios.post(
         `http://localhost:8000/event/create`,
-        data
+        data,
       );
 
       if (response.status === 204) {
@@ -89,14 +91,14 @@ const EventForm = () => {
     setEndTime("");
     setLocation("");
     setImage("");
+    setLocationUrl("");
     setTags([]);
   };
 
   return (
     <div
       onClick={() => updateModals()}
-      className="flex flex-col justify-center rounded-lg p-8 mx-4 my-12 shadow-2xl shadow-gray-700"
-    >
+      className="flex flex-col justify-center rounded-lg p-8 mx-4 my-12 shadow-2xl shadow-gray-700">
       {error && <Modal title="Error" message={showMessage} />}
       {success && <Modal title="Success" message={showMessage} />}
       <div className="text-2xl font-semibold my-4">Create Event</div>
@@ -172,7 +174,12 @@ const EventForm = () => {
                 />
               </div>
             </div>
-            <div className="flex flex-1 flex-col space-y-1">
+            <div className="flex flex-1 flex-col space-y-3">
+              <FormInput
+                label="Location URL"
+                value={locationUrl}
+                setValue={setLocationUrl}
+              />
               <label htmlFor="tags">Tags</label>
               <div className="flex lg:flex-row flex-col space-x-2">
                 {allowedTags.map((tag) => (
@@ -191,8 +198,7 @@ const EventForm = () => {
         <div className="flex justify-center my-4">
           <button
             onClick={(e) => createEvent(e)}
-            className="px-4 py-2 rounded-lg bg-primary text-white"
-          >
+            className="px-4 py-2 rounded-lg bg-primary text-white">
             Create Event
           </button>
         </div>
