@@ -6,20 +6,20 @@ import axios from "axios";
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 
-const BookingCard = ({ currentEvent }) => {
+const BookingCard = ({ currentEvent, fetchEvent }) => {
   const navigate = useNavigate();
   const [userRegistered, setUserRegistered] = useState(false);
   const [bookNow, setBookNow] = useState(false);
 
-  const { user } = useContext(AuthContext);
+  const { user, refreshUser } = useContext(AuthContext);
 
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [showMessage, setShowMessage] = useState("");
+  const [event, setEvent] = useState(currentEvent);
 
   useEffect(() => {
     if (user) {
-      console.log("User:", user);
       const registered = user.registeredEvents.find(
         (event) => event === currentEvent._id,
       );
@@ -27,14 +27,14 @@ const BookingCard = ({ currentEvent }) => {
         setUserRegistered(true);
       }
     }
-  }, [user, currentEvent]);
+  }, [user, event, currentEvent]);
 
-  const bookEvent = () => {
-    console.log("Book event");
+  useEffect(() => {
+    setEvent(currentEvent);
+  }, [currentEvent]);
 
+  const bookEvent = async () => {
     if (!user) {
-      setError(true);
-      setShowMessage("Please login to book an event");
       navigate("/login");
       setTimeout(() => {
         setError(false);
@@ -43,22 +43,24 @@ const BookingCard = ({ currentEvent }) => {
     }
 
     try {
-      const response = axios.put("http://localhost:8000/event/register", {
+      const response = await axios.put("http://localhost:8000/event/register", {
         eventID: currentEvent._id,
         userID: user._id,
       });
 
-      if (response.error) {
-        setError(true);
-        setShowMessage("Error booking event");
-        setTimeout(() => {
-          setError(false);
-        }, 2000);
-      } else if (response.ok) {
+      if (response.status === 200) {
         setSuccess(true);
         setShowMessage("Event booked successfully");
         setTimeout(() => {
           setSuccess(false);
+          fetchEvent();
+          refreshUser();
+        }, 2000);
+      } else {
+        setError(true);
+        setShowMessage("Error booking event");
+        setTimeout(() => {
+          setError(false);
         }, 2000);
       }
     } catch (err) {
@@ -70,12 +72,6 @@ const BookingCard = ({ currentEvent }) => {
       }, 2000);
     }
 
-    setBookNow(false);
-  };
-
-  const updateModals = () => {
-    setError(false);
-    setSuccess(false);
     setBookNow(false);
   };
 
@@ -102,7 +98,7 @@ const BookingCard = ({ currentEvent }) => {
       {success && <Modal title="Success" message={showMessage} />}
       <div className="text-2xl text-black">Date & Time</div>
       <div className="text-lg mt-5 text-gray-500">
-        {formattedDate(currentEvent.scheduleTime)}
+        {formattedDate(event.scheduleTime)}
       </div>
       <div className="text-lg my-5 text-primary">Add to calendar</div>
       {!userRegistered ? (

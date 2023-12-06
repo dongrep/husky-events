@@ -2,7 +2,7 @@ import React from "react";
 import BookingCard from "./BookingCard";
 import EventInfoCard from "./EventInfoCard";
 
-const EventDetailsComponent = ({ currentEvent }) => {
+const EventDetailsComponent = ({ currentEvent, fetchEvent }) => {
   return (
     <div className="relative w-full h-full shadow-lg shadow-gray-400">
       <div className="w-full mt-4 relative h-[255px] lg:h-[595px] rounded-t-md overflow-hidden">
@@ -18,7 +18,7 @@ const EventDetailsComponent = ({ currentEvent }) => {
         </div>
         <div className="flex lg:flex-1 justify-center items-center">
           <div className="flex h-1/2 flex-col justify-center items-start">
-            <BookingCard currentEvent={currentEvent} />
+            <BookingCard currentEvent={currentEvent} fetchEvent={fetchEvent} />
           </div>
         </div>
       </div>

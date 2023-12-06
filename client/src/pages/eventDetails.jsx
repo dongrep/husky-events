@@ -14,7 +14,7 @@ const EventDetails = () => {
   const fetchEvent = async () => {
     setLoading(true);
     const response = await axios.get(
-      `http://localhost:8000/event/getevent?_id=${id}`
+      `http://localhost:8000/event/getevent?_id=${id}`,
     );
     const data = await response.data;
     console.log(data);
@@ -25,11 +25,15 @@ const EventDetails = () => {
   useEffect(() => {
     if (event) return;
     fetchEvent();
-  }, [loading, event]);
+  }, [event]);
 
   return (
     <DefaultLayout>
-      {loading ? <Loader /> : <EventDetailsComponent currentEvent={event} />}
+      {loading ? (
+        <Loader />
+      ) : (
+        <EventDetailsComponent currentEvent={event} fetchEvent={fetchEvent} />
+      )}
     </DefaultLayout>
   );
 };
