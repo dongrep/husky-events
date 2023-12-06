@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../Button/PrimaryButton";
 import { AuthContext } from "../../context/authContext";
@@ -8,7 +8,8 @@ import Modal from "../Modals/Modal";
 import DefaultLayout from "./DefaultLayout";
 
 export default function Login() {
-  const { dispatch } = useContext(AuthContext);
+  const { dispatch, user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +18,12 @@ export default function Login() {
   const [success, setSuccess] = useState(false);
 
   const [showMessage, setShowMessage] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -38,6 +45,10 @@ export default function Login() {
         dispatch({ type: "LOGIN_SUCCESS", payload: res?.data?.details });
         setSuccess(true);
         setShowMessage("User successfully logged in!");
+        setTimeout(() => {
+          setSuccess(false);
+          navigate("/");
+        }, 2000);
       } else {
         setError(true);
         setShowMessage("Invalid email or password. Please try again.");

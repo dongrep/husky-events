@@ -1,12 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import PrimaryButton from "../Button/PrimaryButton";
 import { performAllValidation } from "../../services/helper";
 import FormInput from "../Event/FormInput";
 import Modal from "../Modals/Modal";
 import DefaultLayout from "./DefaultLayout";
+import { AuthContext } from "../../context/authContext";
 
 export default function Signup() {
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -20,6 +22,10 @@ export default function Signup() {
   const [success, setSuccess] = useState(false);
 
   const [showMessage, setShowMessage] = useState("");
+
+  if (user) {
+    navigate("/");
+  }
 
   const handleSignup = async () => {
     try {
