@@ -62,10 +62,7 @@ export const AuthContextProvider = ({ children }) => {
         user: state.user,
         loading: state.loading,
         error: state.error,
-        dispatch,
-        refresh : () => {
-          
-        }
+        dispatch
       }}
     >
       {children}

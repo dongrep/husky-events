@@ -102,7 +102,7 @@ const EventForm = () => {
       <div className="text-2xl font-semibold my-4">Create Event</div>
       <form className="w-full flex-col">
         <div className="flex w-full flex-col space-y-4">
-          <div className="flex w-full gap-5">
+          <div className="flex flex-col lg:flex-row w-full gap-5">
             <FormInput label="Name" value={name} setValue={setName} />
             <FormInput
               label="Organizer"
@@ -110,8 +110,8 @@ const EventForm = () => {
               setValue={setOrganizer}
             />
           </div>
-          <div className="flex w-full justify-center gap-5">
-            <div className="flex w-1/2 flex-col space-y-1">
+          <div className="flex flex-col lg:flex-row w-full justify-center gap-5">
+            <div className="flex lg:w-1/2 flex-col space-y-1">
               <label htmlFor="scheduleTime">Start Time</label>
               <input
                 className="border border-gray-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -124,7 +124,7 @@ const EventForm = () => {
                 onChange={(e) => setStartTime(e.target.value)}
               />
             </div>
-            <div className="flex w-1/2 flex-col space-y-1">
+            <div className="flex lg:w-1/2 flex-col space-y-1">
               <label htmlFor="scheduleTime">End Time</label>
               <input
                 className="border border-gray-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -150,7 +150,7 @@ const EventForm = () => {
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
-          <div className="flex gap-5 w-full">
+          <div className="flex flex-col lg:flex-row gap-5 w-full">
             <FormInput label="Image" value={image} setValue={setImage} />
             <FormInput
               label="Location"
@@ -158,9 +158,9 @@ const EventForm = () => {
               setValue={setLocation}
             />
           </div>
-          <div className="flex w-full gap-5">
+          <div className="flex flex-col lg:flex-row w-full gap-5">
             <div className="flex-1">
-              <div className="h-[210px] w-1/2 mx-auto rounded-lg overflow-clip">
+              <div className="lg:h-[210px] w-full lg:w-1/2 mx-auto rounded-lg overflow-clip">
                 <img
                   src={
                     image !== ""
