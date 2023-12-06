@@ -31,23 +31,24 @@ const validateEventFields = (
   name,
   description,
   organizer,
-  scheduleTime,
+  startTime,
+  endTime,
   duration,
   location,
   image,
-  tags,
+  tags
 ) => {
   if (
     !name ||
     !description ||
     !organizer ||
-    !scheduleTime ||
+    !startTime ||
+    !endTime ||
     !duration ||
     !location ||
     !image ||
     !tags
   ) {
-    // response.status(400).send({ message: "Missing required fields" });
     return false;
   }
   return true;
