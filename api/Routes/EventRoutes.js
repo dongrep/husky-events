@@ -167,17 +167,17 @@ router.put("/register", async (request, response) => {
   let neededUser = await user.findOne({ _id: userID });
 
   if (!neededEvent) {
-    response.send("Event not found!");
+    response.status(404).send("Event not found!");
   } else if (!neededUser) {
-    response.send("User not found!");
+    response.status(404).send("User not found!");
   } else if (neededEvent.attendees.includes(userID)) {
-    response.send("User already registered!");
+    response.status(409).send("User already registered!");
   } else {
     neededEvent.attendees.push(userID);
     neededUser.registeredEvents.push(eventID);
     neededEvent.save();
     neededUser.save();
-    response.send("User registered successfully!");
+    response.status(201).send("User registered successfully!");
   }
 });
 

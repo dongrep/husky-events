@@ -48,13 +48,25 @@ const BookingCard = ({ currentEvent, fetchEvent }) => {
         userID: user._id,
       });
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         setSuccess(true);
         setShowMessage("Event booked successfully");
         setTimeout(() => {
           setSuccess(false);
           fetchEvent();
           refreshUser();
+        }, 2000);
+      } else if (response.status === 404) {
+        setError(true);
+        setShowMessage(response.data);
+        setTimeout(() => {
+          setError(false);
+        }, 2000);
+      } else if (response.status === 409) {
+        setError(true);
+        setShowMessage("Event already booked");
+        setTimeout(() => {
+          setError(false);
         }, 2000);
       } else {
         setError(true);

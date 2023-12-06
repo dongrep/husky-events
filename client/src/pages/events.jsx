@@ -18,7 +18,6 @@ const Events = () => {
     setLoading(true);
     const response = await axios.get("http://localhost:8000/event/events");
     const data = await response.data;
-    console.log(data);
     setEvents(data);
     setFilteredEvents(data);
     setLoading(false);
