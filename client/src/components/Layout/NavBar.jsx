@@ -9,7 +9,6 @@ import { AuthContext } from "../../context/authContext";
 const NavBar = () => {
   const navigate = useNavigate();
   const { user, dispatch } = useContext(AuthContext);
-  console.log("Hello    NavBar   user:", user);
 
   return (
     <div className="w-full mt-4 items-center flex justify-center">
@@ -33,7 +32,12 @@ const NavBar = () => {
           ) : (
             <>
               {`Hello, ${user.firstName}`}
-              <PrimaryButton onClick={() => dispatch({ type: "LOGOUT" })}>
+              <PrimaryButton
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  dispatch({ type: "LOGOUT" });
+                }}
+              >
                 Logout
               </PrimaryButton>
             </>

@@ -8,7 +8,6 @@ import Modal from "../Modals/Modal";
 import DefaultLayout from "./DefaultLayout";
 
 export default function Login() {
-  const navigate = useNavigate();
   const { dispatch } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
@@ -33,30 +32,18 @@ export default function Login() {
         "http://localhost:8000/user/login",
         formData,
       );
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+      localStorage.setItem("token", res?.data?.details?.token);
 
-      const data = res;
       if (res.statusText === "OK") {
-        // Login successful
-        console.log("Login successful:", data.user);
-
+        dispatch({ type: "LOGIN_SUCCESS", payload: res?.data?.details });
         setSuccess(true);
-
         setShowMessage("User successfully logged in!");
-
-        setTimeout(() => {
-          setSuccess(false);
-          navigate("/");
-        }, 2000);
       } else {
-        console.error(`Login failed: ${data.errorMssg}`);
-
         setError(true);
         setShowMessage("Invalid email or password. Please try again.");
       }
-      // navigate("/");
     } catch (err) {
-      console.log("Hello    handleLogin   err:", err);
+      console.error(err);
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
       setError(true);
       setShowMessage(err?.response?.data?.errorMssg || "Something went wrong!");
