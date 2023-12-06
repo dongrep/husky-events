@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import PrimaryButton from "../Button/PrimaryButton";
-import { formattedDate } from "../../utils/dateFormatters";
+import { formattedDate, formattedTime } from "../../utils/dateFormatters";
 import Modal from "../Modals/Modal";
 import axios from "axios";
 import { AuthContext } from "../../context/authContext";
@@ -88,7 +88,7 @@ const BookingCard = ({ currentEvent, fetchEvent }) => {
   };
 
   return (
-    <div className="relative rounded-lg bg-white p-8 flex flex-col items-start">
+    <div className="relative rounded-lg bg-white p-8 w-full mx-12 mx-auto flex flex-col items-start">
       {bookNow && (
         <Modal title="Book Now">
           <div className="text-lg text-black">
@@ -110,7 +110,10 @@ const BookingCard = ({ currentEvent, fetchEvent }) => {
       {success && <Modal title="Success" message={showMessage} />}
       <div className="text-2xl text-black">Date & Time</div>
       <div className="text-lg mt-5 text-gray-500">
-        {formattedDate(event.scheduleTime)}
+        {formattedDate(event.startTime)}
+      </div>
+      <div className="text-body mt-2 text-gray-500">
+        {formattedTime(event.startTime)} - {formattedTime(event.endTime)}
       </div>
       <div className="text-lg my-5 text-primary">Add to calendar</div>
       {!userRegistered ? (
