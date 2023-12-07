@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
 import Sidebar from "../sidebar/Sidebar";
+import Toast from "../toast/Toast";
+
 import "./addEvent.css";
 
 const AddEvent = () => {
@@ -25,6 +27,8 @@ const AddEvent = () => {
   const navigate = useNavigate();
 
   const [info, setInfo] = useState(INITIAL_STATE);
+  const [showErrorToast, setShowErrorToast] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   console.log("Hello    AddUser   info:", info);
 
   const handleChange = (e) => {
@@ -39,6 +43,8 @@ const AddEvent = () => {
       navigate("/events");
     } catch (error) {
       console.log("Hello    onSubmit   error:", error);
+      setShowErrorToast(true);
+      setErrorMessage(error?.response?.data || "Something went wrong");
     }
   };
 
@@ -130,6 +136,13 @@ const AddEvent = () => {
               Create
             </button>
           </div>
+          <Toast
+            message={errorMessage}
+            show={showErrorToast}
+            onClose={() => {
+              setShowErrorToast(false);
+            }}
+          />
         </div>
         <Footer />
       </div>

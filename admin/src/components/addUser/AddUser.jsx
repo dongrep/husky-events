@@ -104,7 +104,7 @@ const AddUser = () => {
               <label htmlFor="">Role</label>
               <select id="role" onChange={handleChange}>
                 <option value="user">User</option>
-                <option value="organization">Organization</option>
+                <option value="organizer">Organizer</option>
                 <option value="admin">Admin</option>
               </select>
             </div>

@@ -38,8 +38,8 @@ router.post("/create", async (request, response) => {
     //check if event already exists by name
     let existingEvent = await event.findOne({ name: name });
 
-    if (existingEvent.name == name) {
-      response.send("Event already exists!");
+    if (existingEvent && existingEvent.name == name) {
+      return response.status(409).send("Event with given name already exists!");
     }
 
     const newEvent = new event({
@@ -56,13 +56,14 @@ router.post("/create", async (request, response) => {
     });
 
     await newEvent.save();
-    const neededUser = user.findOne({ _id: organizer });
+    const neededUser = await user.findOne({ _id: organizer });
+
     if (neededUser) {
       neededUser.yourEvents.push(newEvent._id);
       await neededUser.save();
     }
 
-    response.send("Event created successfully");
+    response.status(200).send("Event created successfully");
   } catch (err) {
     response.status(400).send("Something went wrong");
   }

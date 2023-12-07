@@ -127,10 +127,7 @@ const Events = () => {
               <tr>
                 <td>Name</td>
                 <td>Organizer</td>
-                {/* <td>Start Time</td>
-                <td>End Time</td> */}
                 <td>Location</td>
-                <td>Cost</td>
                 <td>Status</td>
                 <td>Action</td>
               </tr>
@@ -146,7 +143,6 @@ const Events = () => {
                   </td>
                   <td>{event?.organizer || "NEU"}</td>
                   <td>{event?.location}</td>
-                  <td>{event?.cost || "Free"}</td>
                   <td>{handleEventStatus(event?.startTime, event?.endTime)}</td>
                   <td>
                     <div className="buttons">

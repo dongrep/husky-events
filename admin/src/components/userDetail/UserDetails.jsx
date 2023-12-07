@@ -121,7 +121,7 @@ const UserDetails = () => {
               <label htmlFor="">Role</label>
               <select value={user.role} id="role" onChange={handleChange}>
                 <option value="user">User</option>
-                <option value="organization">Organization</option>
+                <option value="organizer">Organizer</option>
                 <option value="admin">Admin</option>
               </select>
             </div>

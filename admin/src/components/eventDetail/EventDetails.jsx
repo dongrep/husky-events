@@ -5,6 +5,8 @@ import axios from "axios";
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
 import Sidebar from "../sidebar/Sidebar";
+import Toast from "../toast/Toast";
+
 import "./eventDetails.css";
 
 const EventDetails = () => {
@@ -26,7 +28,8 @@ const EventDetails = () => {
   // };
 
   const [event, setEvent] = useState({});
-  const [image, setImage] = useState("");
+  const [showErrorToast, setShowErrorToast] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const eventId = useLocation().pathname.split("/").pop();
   console.log("Hello    EventDetails   eventId:", eventId);
@@ -57,9 +60,10 @@ const EventDetails = () => {
         `http://localhost:8000/event/edit/${eventId}`,
         event
       );
-      console.log("Hello    onSubmit   res:", res);
     } catch (error) {
-      console.log("Hello    onSubmit   error:", error);
+      console.error("Hello    onSubmit   error:", error);
+      setShowErrorToast(true);
+      setErrorMessage(error.message);
     }
   };
 
@@ -153,6 +157,13 @@ const EventDetails = () => {
               Update
             </button>
           </div>
+          <Toast
+            message={errorMessage}
+            show={showErrorToast}
+            onClose={() => {
+              setShowErrorToast(false);
+            }}
+          />
         </div>
         <Footer />
       </div>

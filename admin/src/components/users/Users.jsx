@@ -96,7 +96,6 @@ const Users = () => {
             <thead>
               <tr>
                 <td>Name</td>
-                <td>NU-ID</td>
                 <td>Email</td>
                 <td>Phone</td>
                 <td>Role</td>
@@ -112,7 +111,6 @@ const Users = () => {
                       {`${user.firstName} ${user.lastName}`}
                     </div>
                   </td>
-                  <td>{user?.nuId || "100100101"}</td>
                   <td>{user?.email}</td>
                   <td>{user?.phone}</td>
                   <td>{user?.role}</td>
