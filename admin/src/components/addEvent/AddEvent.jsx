@@ -9,16 +9,14 @@ import "./addEvent.css";
 
 const AddEvent = () => {
   const INITIAL_STATE = {
-    // id: 1,
     name: "",
     description: "",
-    organizationID: "",
+    organizer: "",
     startTime: "",
     endTime: "",
-    startDate: "",
-    endDate: "",
     location: "",
-    // images: [],
+    locationUrl: "",
+    image: "",
     // links: [],
     // tags: [],
     // cost: 0,
@@ -35,7 +33,7 @@ const AddEvent = () => {
 
   const onSubmit = async () => {
     try {
-      const data = { ...info, organizationID: "101" };
+      const data = { ...info };
       const res = await axios.post("http://localhost:8000/event/create", data);
       console.log("Hello    onSubmit   res:", res);
       navigate("/events");
@@ -55,7 +53,7 @@ const AddEvent = () => {
           <h1 className="heading">Create Event</h1>
           <div className="formContainer">
             <div className="formGroup">
-              <label htmlFor="">Event Name</label>
+              <label htmlFor="name">Event Name</label>
               <input
                 type="text"
                 placeholder="Enter you event name"
@@ -64,7 +62,16 @@ const AddEvent = () => {
               />
             </div>
             <div className="formGroup">
-              <label htmlFor="">Event Location</label>
+              <label htmlFor="organizer">Organizer</label>
+              <input
+                type="text"
+                placeholder="Enter organizer details"
+                id="organizer"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="formGroup">
+              <label htmlFor="location">Event Location</label>
               <input
                 type="text"
                 id="location"
@@ -72,34 +79,40 @@ const AddEvent = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className="time">
+            <div className="formGroup">
+              <label htmlFor="image">Event Location URL</label>
+              <input
+                type="text"
+                id="locationUrl"
+                placeholder="Enter you event location URL"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="formGroup">
+              <label htmlFor="locationUrl">Image URL</label>
+              <input
+                type="text"
+                id="image"
+                placeholder="Enter you event image"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="date">
               <div className="formGroup">
                 <label htmlFor="">Start Time</label>
                 <input
-                  type="text"
+                  type="datetime-local"
                   id="startTime"
-                  placeholder="Enter you event start time"
                   onChange={handleChange}
                 />
               </div>
               <div className="formGroup">
                 <label htmlFor="">End Time</label>
                 <input
-                  type="text"
+                  type="datetime-local"
                   id="endTime"
-                  placeholder="Enter you event end time"
                   onChange={handleChange}
                 />
-              </div>
-            </div>
-            <div className="date">
-              <div className="formGroup">
-                <label htmlFor="">Start Date</label>
-                <input type="date" id="startDate" onChange={handleChange} />
-              </div>
-              <div className="formGroup">
-                <label htmlFor="">End Date</label>
-                <input type="date" id="endDate" onChange={handleChange} />
               </div>
             </div>
             <div className="formGroup">

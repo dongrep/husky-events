@@ -19,7 +19,6 @@ const Events = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [paginatedData, setPaginatedData] = useState("");
   const batchSize = 10;
-  console.log("Hello    Users   input:", input);
 
   useEffect(() => {
     fetchData();
@@ -40,21 +39,6 @@ const Events = () => {
       // setError(error);
     }
   };
-
-  // const handleDelete = async (id) => {
-  //   console.log("Hello    handleDelete   id:", id);
-  //   try {
-  //     const res = await axios.delete(
-  //       `http://localhost:8000/event/delete?_id=${id}`
-  //     );
-
-  //     window.location.reload();
-
-  //     console.log("Hello    handleDelete   res:", res);
-  //   } catch (error) {
-  //     console.log("Hello    handleDelete   error:", error);
-  //   }
-  // };
 
   useEffect(() => {
     const startIndex = (pageNumber - 1) * batchSize;
@@ -160,12 +144,10 @@ const Events = () => {
                       {event?.name}
                     </div>
                   </td>
-                  <td>{event?.organizationID}</td>
-                  {/* <td>{event?.startTime}</td>
-                  <td>{event?.endTime}</td> */}
+                  <td>{event?.organizer || "NEU"}</td>
                   <td>{event?.location}</td>
                   <td>{event?.cost || "Free"}</td>
-                  <td>{handleEventStatus(event?.startDate, event?.endDate)}</td>
+                  <td>{handleEventStatus(event?.startTime, event?.endTime)}</td>
                   <td>
                     <div className="buttons">
                       <Link to={`/events/${event?._id}`}>

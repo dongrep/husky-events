@@ -26,6 +26,8 @@ const EventDetails = () => {
   // };
 
   const [event, setEvent] = useState({});
+  const [image, setImage] = useState("");
+
   const eventId = useLocation().pathname.split("/").pop();
   console.log("Hello    EventDetails   eventId:", eventId);
 
@@ -72,17 +74,27 @@ const EventDetails = () => {
           <h1 className="heading">View Event</h1>
           <div className="formContainer">
             <div className="formGroup">
-              <label htmlFor="">Event Name</label>
+              <label htmlFor="name">Event Name</label>
               <input
                 type="text"
-                placeholder="Enter you event name"
+                placeholder="Enter event name"
                 value={event?.name}
                 id="name"
                 onChange={handleChange}
               />
             </div>
             <div className="formGroup">
-              <label htmlFor="">Event Location</label>
+              <label htmlFor="organizer">Organizer</label>
+              <input
+                type="text"
+                placeholder="Enter organizer details"
+                value={event?.organizer}
+                id="organizer"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="formGroup">
+              <label htmlFor="location">Event Location</label>
               <input
                 type="text"
                 placeholder="Enter you event location"
@@ -91,11 +103,22 @@ const EventDetails = () => {
                 onChange={handleChange}
               />
             </div>
+            <div className="formGroup">
+              <label htmlFor="locationUrl">Event Location URL</label>
+              <input
+                type="text"
+                placeholder="Enter you event location URL"
+                value={event?.locationUrl}
+                id="locationUrl"
+                onChange={handleChange}
+              />
+            </div>
             <div className="time">
               <div className="formGroup">
-                <label htmlFor="">Start Time</label>
+                <label htmlFor="startTime">Start Time</label>
                 <input
-                  type="text"
+                  type="datetime-local"
+                  name="startTime"
                   placeholder="Enter you event start time"
                   value={event?.startTime}
                   id="startTime"
@@ -103,9 +126,10 @@ const EventDetails = () => {
                 />
               </div>
               <div className="formGroup">
-                <label htmlFor="">End Time</label>
+                <label htmlFor="endTime">End Time</label>
                 <input
-                  type="text"
+                  type="datetime-local"
+                  name="endTime"
                   placeholder="Enter you event end time"
                   value={event?.endTime}
                   id="endTime"
@@ -113,28 +137,8 @@ const EventDetails = () => {
                 />
               </div>
             </div>
-            <div className="date">
-              <div className="formGroup">
-                <label htmlFor="">Start Date</label>
-                <input
-                  type="date"
-                  value={event?.startDate}
-                  id="startDate"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="formGroup">
-                <label htmlFor="">End Date</label>
-                <input
-                  type="date"
-                  value={event?.endDate}
-                  id="endDate"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
             <div className="formGroup">
-              <label htmlFor="">Event Description</label>
+              <label htmlFor="description">Event Description</label>
               <textarea
                 placeholder="Enter you event description"
                 rows="6"

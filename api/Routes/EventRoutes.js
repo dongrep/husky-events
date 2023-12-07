@@ -4,18 +4,18 @@ const event = require("../Model/EventSchema");
 const user = require("../Model/UserSchema");
 const { validateEventFields } = require("../helper");
 
-router.post("/create", (request, response) => {
+router.post("/create", async (request, response) => {
   const {
     name,
     description,
     organizer,
     startTime,
     endTime,
-    cost,
     location,
     locationUrl,
     image,
     tags,
+    attendees,
   } = request.body;
 
   if (
@@ -27,45 +27,45 @@ router.post("/create", (request, response) => {
       startTime,
       endTime,
       location,
-      image,
-      tags,
+      image
     )
   ) {
     response.status(204).send("Missing required fields");
     return;
   }
 
-  //check if event already exists by name
-  let existingEvent = event.findOne({ name: name });
+  try {
+    //check if event already exists by name
+    let existingEvent = await event.findOne({ name: name });
 
-  if (existingEvent.name == name) {
-    response.send("Event already exists!");
+    if (existingEvent.name == name) {
+      response.send("Event already exists!");
+    }
+
+    const newEvent = new event({
+      name,
+      description,
+      organizer,
+      startTime,
+      endTime,
+      location,
+      locationUrl,
+      image,
+      tags,
+      attendees,
+    });
+
+    await newEvent.save();
+    const neededUser = user.findOne({ _id: organizer });
+    if (neededUser) {
+      neededUser.yourEvents.push(newEvent._id);
+      await neededUser.save();
+    }
+
+    response.send("Event created successfully");
+  } catch (err) {
+    response.status(400).send("Something went wrong");
   }
-
-  const newEvent = new event({
-    name,
-    description,
-    organizer,
-    startTime,
-    endTime,
-    cost: cost ? cost : 0,
-    location,
-    locationUrl,
-    image,
-    tags,
-  });
-
-  let savedEvent;
-
-  newEvent.save().then(
-    () => {
-      response.send("Event created successfully");
-      savedEvent = newEvent;
-      const neededUser = user.findOne({ _id: organizer });
-      neededUser.createdEvents.push(savedEvent._id);
-    },
-    (err) => response.status(400).send({ message: err }),
-  );
 });
 
 router.put("/edit", async (request, response) => {
@@ -101,7 +101,7 @@ router.put("/edit", async (request, response) => {
       locationUrl,
       image,
       tags,
-    },
+    }
   );
 
   if (!neededEvent) {

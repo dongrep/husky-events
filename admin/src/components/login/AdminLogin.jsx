@@ -54,7 +54,7 @@ export default function Login() {
       }
     } catch (err) {
       console.error(err);
-      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+      dispatch({ type: "LOGIN_FAILURE", payload: err?.response?.data });
       setError(true);
       setShowMessage(err?.response?.data?.errorMssg || "Something went wrong!");
     }
