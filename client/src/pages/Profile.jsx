@@ -24,17 +24,21 @@ const Profile = () => {
         // fetch from multiple endpoints
 
         const response = await axios.get(
-          `http://localhost:8000/event/getregisteredevents?userID=${user._id}`,
+          `http://localhost:8000/event/getregisteredevents?userID=${user._id}`
         );
         const createdEventsResponse = await axios.get(
-          `http://localhost:8000/event/getcreatedevents?userID=${user._id}`,
+          `http://localhost:8000/event/getcreatedevents?userID=${user._id}`
         );
 
         const data = await response.data;
+        const filteredData = data.filter((event) => event !== null);
         const createdEventsData = await createdEventsResponse.data;
+        const filteredCreatedEventsData = createdEventsData.filter(
+          (event) => event !== null
+        );
 
-        setRegisteredEvents(data);
-        setCreatedEvents(createdEventsData);
+        setRegisteredEvents(filteredData);
+        setCreatedEvents(filteredCreatedEventsData);
         setLoadingEvents(false);
       };
       fetchEvents();
@@ -79,13 +83,15 @@ const Profile = () => {
             <label
               htmlFor="profileImage"
               className="cursor-pointer bg-blue-500 text-white rounded-full p-1.5 mt-14"
-              onClick={handleEditClick}>
+              onClick={handleEditClick}
+            >
               <IoPencilOutline />
             </label>
             {editMode && (
               <button
                 className="ml-2 bg-green-500 text-white rounded-full p-2 mt-14"
-                onClick={handleSaveClick}>
+                onClick={handleSaveClick}
+              >
                 Save
               </button>
             )}
@@ -122,7 +128,7 @@ const Profile = () => {
               <div className="line h-1 w-20 bg-blue-300"></div>
             </div>
             <div className="flex w-full overflow-x-scroll py-4 gap-4 ">
-              {user?.registeredEvents.length === 0 && (
+              {!loadingEvents && registeredEvents.length === 0 && (
                 <p>You haven't booked any events.</p>
               )}
               {loadingEvents ? (
@@ -143,7 +149,7 @@ const Profile = () => {
               <div className="line h-1 w-20 bg-blue-300"></div>
             </div>
             <div className="flex w-full overflow-x-scroll py-4 gap-4 ">
-              {user?.createdEvents?.length === 0 && (
+              {!loadingEvents && createdEvents?.length === 0 && (
                 <p>You haven't created any events.</p>
               )}
               {loadingEvents ? (
