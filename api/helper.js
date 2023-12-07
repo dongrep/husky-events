@@ -32,7 +32,6 @@ const validateEventFields = (
   organizer,
   startTime,
   endTime,
-  cost,
   location,
   image
 ) => {
@@ -42,7 +41,6 @@ const validateEventFields = (
     !organizer ||
     !startTime ||
     !endTime ||
-    !cost ||
     !location ||
     !image
   ) {

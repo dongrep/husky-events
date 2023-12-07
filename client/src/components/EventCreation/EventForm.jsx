@@ -1,10 +1,13 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "../Modals/Modal";
 import FormInput from "../Event/FormInput";
 import Checkbox from "../FormComponents/Checkbox";
+import { AuthContext } from "../../context/authContext";
 
 const EventForm = () => {
+  const { user } = useContext(AuthContext);
+
   const allowedTags = [
     "sports",
     "food",
@@ -29,6 +32,12 @@ const EventForm = () => {
   const [success, setSuccess] = useState(false);
   const [showMessage, setShowMessage] = useState("");
 
+  useEffect(() => {
+    if (user) {
+      setOrganizer(user.firstName + " " + user.lastName);
+    }
+  }, [user]);
+
   const updateTags = (e) => {
     if (e.target.checked) {
       setTags([...tags, e.target.value]);
@@ -47,7 +56,7 @@ const EventForm = () => {
     const data = {
       name: name,
       description: description,
-      organizer: organizer,
+      organizer: user._id,
       startTime: startTime,
       endTime: endTime,
       location: location,
@@ -109,7 +118,8 @@ const EventForm = () => {
             <FormInput
               label="Organizer"
               value={organizer}
-              setValue={setOrganizer}
+              setValue={null}
+              disabled={true}
             />
           </div>
           <div className="flex flex-col lg:flex-row w-full justify-center gap-5">
