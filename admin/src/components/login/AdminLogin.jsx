@@ -35,7 +35,7 @@ export default function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/user/login",
+        "http://localhost:8000/user/loginAdmin",
         formData
       );
       localStorage.setItem("token", res?.data?.details?.token);
@@ -87,7 +87,9 @@ export default function Login() {
       )}
       <div className="flex lg:flex-1 px-8 py-5 flex-col gap-24 w-full justify-center bg-gray-800">
         <div className="flex flex-col items-start">
-          <div className="flex items-center text-4xl font-bold text-center">Admin Dashboard Login</div>
+          <div className="flex items-center text-4xl font-bold text-center">
+            Admin Dashboard Login
+          </div>
         </div>
         <div className="flex w-full">
           <div className="flex flex-col gap-10 w-full justify-center items-center">
