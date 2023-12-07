@@ -7,7 +7,7 @@ const PrimaryButton = ({ children, buttonWidth, onClick, props }) => {
       onClick={onClick}
       className={
         buttonWidth +
-        " px-1 py-2 rounded-md  bg-white text-black flex justify-center items-center"
+        " px-1 py-2 rounded-md  bg-white text-black flex justify-center items-center hover:bg-gray-300 font-bold border-2"
       }
     >
       {children}
