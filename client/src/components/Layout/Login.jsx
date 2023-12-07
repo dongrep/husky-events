@@ -18,6 +18,9 @@ export default function Login() {
   const [success, setSuccess] = useState(false);
 
   const [showMessage, setShowMessage] = useState("");
+  console.log(showMessage);
+  console.log("error" ,error);
+
 
   useEffect(() => {
     if (user) {
@@ -34,7 +37,16 @@ export default function Login() {
       password: password,
     };
 
+    
+   
+
     try {
+      const isNortheasternEmail = /^[A-Za-z0-9._%+-]+@northeastern\.edu$/i;
+      console.log(!email.match(isNortheasternEmail));
+      if (!email.match(isNortheasternEmail)) {
+        setError(true);
+        setShowMessage("Please use a Northeastern University email address.");
+      } else {  
       const res = await axios.post(
         "http://localhost:8000/user/login",
         formData,
@@ -42,18 +54,20 @@ export default function Login() {
       localStorage.setItem("token", res?.data?.details?.token);
 
       if (res.statusText === "OK") {
-        dispatch({ type: "LOGIN_SUCCESS", payload: res?.data?.details });
+        
         setSuccess(true);
         setShowMessage("User successfully logged in!");
         setTimeout(() => {
           setSuccess(false);
+          dispatch({ type: "LOGIN_SUCCESS", payload: res?.data?.details });
           navigate("/");
         }, 2000);
       } else {
         setError(true);
         setShowMessage("Invalid email or password. Please try again.");
       }
-    } catch (err) {
+    }
+   } catch (err) {
       console.error(err);
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
       setError(true);
