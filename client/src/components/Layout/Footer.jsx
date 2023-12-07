@@ -1,6 +1,7 @@
 import React from "react";
 import { IoLogoInstagram } from "react-icons/io";
 import { IoLogoFacebook, IoLogoLinkedin } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -10,18 +11,18 @@ const Footer = () => {
           Husky<span className="text-primary"> Events</span>
         </div>
         <nav className="flex gap-4">
-          <a href="/" className="text-base">
+          <Link to="/" className="text-base">
             Home
-          </a>
-          <a href="/" className="text-base">
+          </Link>
+          <Link to="/create-event" className="text-base">
             Events
-          </a>
-          <a href="/about" className="text-base">  {/* This is the link onClick for about page */}
+          </Link>
+          <Link to="/about" className="text-base">  {/* This is the link onClick for about page */}
             About
-          </a>
-          <a href="/contact" className="text-base">
+          </Link>
+          <Link to="/contact" className="text-base">
             Contact
-          </a>
+          </Link>
         </nav>
         <div className="w-3/4 bg-white h-[1px] mt-3"></div>
         <div className="flex gap-4 mt-4">

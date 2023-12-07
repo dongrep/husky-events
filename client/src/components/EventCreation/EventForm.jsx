@@ -95,7 +95,6 @@ const EventForm = () => {
   const clearFields = () => {
     setName("");
     setDescription("");
-    setOrganizer("");
     setStartTime("");
     setEndTime("");
     setLocation("");
