@@ -28,8 +28,8 @@ const EventDetails = () => {
   // };
 
   const [event, setEvent] = useState({});
-  const [showErrorToast, setShowErrorToast] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
+  const [message, setMessage] = useState("");
 
   const eventId = useLocation().pathname.split("/").pop();
   console.log("Hello    EventDetails   eventId:", eventId);
@@ -60,10 +60,12 @@ const EventDetails = () => {
         `http://localhost:8000/event/edit/${eventId}`,
         event
       );
+      setShowToast(true);
+      setMessage("Event updated successfully");
     } catch (error) {
       console.error("Hello    onSubmit   error:", error);
-      setShowErrorToast(true);
-      setErrorMessage(error.message);
+      setShowToast(true);
+      setMessage(error.message);
     }
   };
 
@@ -158,10 +160,10 @@ const EventDetails = () => {
             </button>
           </div>
           <Toast
-            message={errorMessage}
-            show={showErrorToast}
+            message={message}
+            show={showToast}
             onClose={() => {
-              setShowErrorToast(false);
+              setShowToast(false);
             }}
           />
         </div>

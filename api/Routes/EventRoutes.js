@@ -69,7 +69,7 @@ router.post("/create", async (request, response) => {
   }
 });
 
-router.put("/edit", async (request, response) => {
+router.put("/edit/:id", async (request, response) => {
   const {
     _id,
     name,
@@ -77,11 +77,9 @@ router.put("/edit", async (request, response) => {
     organizer,
     startTime,
     endTime,
-    cost,
     location,
     locationUrl,
     image,
-    tags,
   } = request.body;
 
   if (name == null) {
@@ -89,6 +87,7 @@ router.put("/edit", async (request, response) => {
     return;
   }
 
+  try {
   let neededEvent = await event.findOneAndUpdate(
     { _id: _id },
     {
@@ -97,19 +96,21 @@ router.put("/edit", async (request, response) => {
       organizer,
       startTime,
       endTime,
-      cost,
       location,
       locationUrl,
       image,
-      tags,
     }
   );
+  
 
   if (!neededEvent) {
     response.send("Event not found!");
   } else {
     response.json(request.body);
   }
+} catch (err) {
+  console.log(err);
+}
 });
 
 router.delete("/delete", async (request, response) => {

@@ -27,8 +27,8 @@ const AddEvent = () => {
   const navigate = useNavigate();
 
   const [info, setInfo] = useState(INITIAL_STATE);
-  const [showErrorToast, setShowErrorToast] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
+  const [message, setMessage] = useState("");
   console.log("Hello    AddUser   info:", info);
 
   const handleChange = (e) => {
@@ -40,11 +40,15 @@ const AddEvent = () => {
       const data = { ...info };
       const res = await axios.post("http://localhost:8000/event/create", data);
       console.log("Hello    onSubmit   res:", res);
-      navigate("/events");
+      setShowToast(true);
+      setMessage("Event created successfully");
+      setTimeout(() => {
+        navigate("/events");
+      }, 2000);
     } catch (error) {
       console.log("Hello    onSubmit   error:", error);
-      setShowErrorToast(true);
-      setErrorMessage(error?.response?.data || "Something went wrong");
+      setShowToast(true);
+      setMessage(error?.response?.data || "Something went wrong");
     }
   };
 
@@ -137,10 +141,10 @@ const AddEvent = () => {
             </button>
           </div>
           <Toast
-            message={errorMessage}
-            show={showErrorToast}
+            message={message}
+            show={showToast}
             onClose={() => {
-              setShowErrorToast(false);
+              setShowToast(false);
             }}
           />
         </div>
