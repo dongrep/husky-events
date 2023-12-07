@@ -4,7 +4,7 @@ const FormInput = ({
   label,
   value,
   setValue,
-  placeholder,
+  placeholder = "Input here",
   type = "text",
   obscureText = false,
   disabled = false,
