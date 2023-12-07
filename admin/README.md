@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Husky Events Admin Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the admin-side of the application for Husky Events, a web application for managing and discovering events at a university. It is built using ReactJS and makes use of various concepts and libraries.
 
-## Available Scripts
+## Concepts and Libraries Used
 
-In the project directory, you can run:
+- ReactJS: The application is built using ReactJS, a popular JavaScript library for building user interfaces. It allows for the creation of reusable UI components and provides a declarative approach to building UIs.
 
-### `npm start`
+- ## Routing:
+    React Router is used for handling client-side routing. It enables navigation between different pages of the application without a full page reload.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- ## Link: 
+    The Link component from React Router is used for creating links between different routes in the application. It provides a declarative way to navigate between pages.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- ## Hooks:
+     React Hooks are used for managing state and side effects in functional components. They allow for the use of state and other React features without writing a class.
 
-### `npm test`
+- ## Functions and Arrow Functions:
+     JavaScript functions and arrow functions are used extensively throughout the application for defining reusable logic and event handlers.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- ## Icons:
+     Icons from the react/icons library are imported and used in the application for enhancing the user interface and providing visual cues.
 
-### `npm run build`
+- ## Axios:
+     Axios is a popular JavaScript library used for making HTTP requests. It is used in the application for communicating with the server-side API.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- ## useAuthContext: 
+     The useAuthContext hook is used for managing user authentication and authorization in the application. It provides access to the authentication state and methods for logging in and out.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- ## CORS:
+     Cross-Origin Resource Sharing (CORS) is a mechanism that allows restricted resources on a web page to be requested from another domain outside the domain from which the resource originated. It is used in the application to enable communication between the client-side and server-side components.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Getting Started
 
-### `npm run eject`
+1. Clone the repository.
+2. Install the dependencies by running `npm install`.
+3. Start the development server by running `npm start`.
+4. Open the application in your browser at `http://localhost:3000`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Contributing
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Contributions are welcome! If you would like to contribute to the project, please follow the guidelines in [CONTRIBUTING.md](/d:/INFO6150-WD/Group-Project/husky-events/client/CONTRIBUTING.md).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## License
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the [MIT License](/d:/INFO6150-WD/Group-Project/husky-events/client/LICENSE).
