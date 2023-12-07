@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   MdDashboard,
   MdSupervisedUserCircle,
@@ -11,9 +11,17 @@ import { GiPartyFlags } from "react-icons/gi";
 import MenuLink from "../menuLink/MenuLink";
 import userImg from "../../assets/images/noavatar.png";
 import ThemeContext from "../../context/ThemeContext";
+import { AuthContext } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
+import AlertModal from "../alertModal/AlertModal";
 
 const Sidebar = () => {
   const { toggleTheme, theme } = useContext(ThemeContext);
+  const { user, dispatch } = useContext(AuthContext);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  const navigate = useNavigate();
+
   return (
     <div className="sidebar-container">
       <div className="user">
@@ -25,7 +33,9 @@ const Sidebar = () => {
           className="userImage"
         />
         <div className="userDetail">
-          <span className="username">John Doe</span>
+          <span className="username">
+            {user?.firstName} {user?.lastName}
+          </span>
           <span className="userTitle">Admin</span>
         </div>
       </div>
@@ -40,7 +50,12 @@ const Sidebar = () => {
         ))}
       </ul>
 
-      <button className="logout">
+      <button
+        className="logout"
+        onClick={() => {
+          setShowLogoutModal(true);
+        }}
+      >
         <MdLogout />
         Logout
       </button>
@@ -57,6 +72,18 @@ const Sidebar = () => {
           <div class="w-11 h-6 bg-black peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
         </label>
       </div>
+      <AlertModal
+        message={"Are you sure you want to logout?"}
+        isOpen={showLogoutModal}
+        onConfirm={() => {
+          localStorage.removeItem("token");
+          dispatch({ type: "LOGOUT" });
+          navigate("/login");
+        }}
+        onClose={() => {
+          setShowLogoutModal(false);
+        }}
+      />
     </div>
   );
 };
@@ -80,11 +107,11 @@ const menuItems = [
         path: "/events",
         icon: <GiPartyFlags />,
       },
-      {
-        title: "Transactions",
-        path: "/transactions",
-        icon: <MdAttachMoney />,
-      },
+      // {
+      //   title: "Transactions",
+      //   path: "/transactions",
+      //   icon: <MdAttachMoney />,
+      // },
     ],
   },
 ];

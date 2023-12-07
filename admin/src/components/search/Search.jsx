@@ -3,7 +3,7 @@ import "./search.css";
 
 const Search = ({ placeholder, setInput }) => {
   return (
-    <div className="container">
+    <div className="search-container">
       <MdSearch />
       <input
         type="text"

@@ -27,7 +27,8 @@ const NavBar = () => {
       <div className="container px-8 text-[#000] flex items-center justify-between">
         <div
           onClick={() => navigate("/")}
-          className="text-xl md:text-3xl hover:cursor-pointer font-semibold">
+          className="text-xl md:text-3xl hover:cursor-pointer font-semibold"
+        >
           Husky<span className="text-primary">Events</span>
         </div>
         <nav className="flex items-center gap-4">
@@ -44,7 +45,8 @@ const NavBar = () => {
             <>
               <Link
                 to="/profile"
-                className="flex line-clamp-2 items-center gap-2">
+                className="flex line-clamp-2 items-center gap-2"
+              >
                 <IoPersonCircleSharp className="h-12 w-12 text-primary hidden md:block" />
                 <div className="flex flex-col text-xs lg:text-base">
                   {getGretting()}
@@ -55,7 +57,8 @@ const NavBar = () => {
                 onClick={() => {
                   localStorage.removeItem("token");
                   dispatch({ type: "LOGOUT" });
-                }}>
+                }}
+              >
                 Logout
               </PrimaryButton>
             </>

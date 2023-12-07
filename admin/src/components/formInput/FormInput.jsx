@@ -4,10 +4,9 @@ const FormInput = ({
   label,
   value,
   setValue,
-  placeholder = "Input here",
+  placeholder,
   type = "text",
   obscureText = false,
-  disabled = false,
 }) => {
   return (
     <div className="flex w-full flex-col space-y-1">
@@ -19,9 +18,7 @@ const FormInput = ({
         placeholder={placeholder}
         value={value}
         obscureText={obscureText}
-        disabled={disabled}
-        className="border border-gray-300 rounded-lg p-4 focus:outline-none focus:ring-2
-         focus:ring-primary focus:border-transparent"
+        className="border text-black border-gray-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
         onChange={(e) => setValue(e.target.value)}
       />
     </div>
