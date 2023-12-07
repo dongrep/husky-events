@@ -17,12 +17,14 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [nuId, setNuId] = useState("");
 
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const [showMessage, setShowMessage] = useState("");
 
+  
   if (user) {
     navigate("/");
   }
@@ -32,6 +34,7 @@ export default function Signup() {
       const formData = {
         firstName: firstName,
         lastName: lastName,
+        nuId: nuId,
         email: email,
         password: password,
         confirmPassword: confirmPassword,
@@ -69,10 +72,15 @@ export default function Signup() {
         // Handle error, show message to the user, etc.
       }
     } catch (error) {
+      
       setError(true);
       setShowMessage("An unexpected error occurred. Please try again later.");
+     
       console.error("Error:", error);
+
       // Handle network errors or other exceptions
+
+     
     }
   };
 
@@ -103,7 +111,7 @@ export default function Signup() {
         </div>
 
         <div className="flex lg:flex-1 pt-40 py-10 px-8 flex-col gap-12 h-full overflow-y-scroll w-full justify-center">
-          <div className="flex items-center text-4xl font-bold">Sign Up</div>
+          <div className="flex items-center mt-7 text-4xl font-bold">Sign Up</div>
           <div className="flex w-full">
             <div className="flex flex-col gap-8 w-full justify-center items-center">
               <FormInput
@@ -118,6 +126,13 @@ export default function Signup() {
                 value={lastName}
                 setValue={setLastName}
                 placeholder={"Your Last Name"}
+              />
+
+              <FormInput
+                label="NUID"
+                value={nuId}
+                setValue={setNuId}
+                placeholder={"Your NUID"}
               />
 
               <FormInput

@@ -50,12 +50,13 @@ const getUserByToken = async (req, res) => {
 // Create User
 const createUser = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, phone, role } = req.body;
+    const { firstName, lastName, nuId, email, password, phone, role } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new Users({
       firstName,
       lastName,
+      nuId,
       email,
       phone,
       role,

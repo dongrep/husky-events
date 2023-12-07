@@ -7,6 +7,7 @@ const FormInput = ({
   placeholder,
   type = "text",
   obscureText = false,
+  errorMessage = "",
 }) => {
   return (
     <div className="flex w-full flex-col space-y-1">
