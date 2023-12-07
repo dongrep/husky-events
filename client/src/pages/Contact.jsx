@@ -20,7 +20,6 @@ const Contact = () => {
 
 
     const saveContact = async (e) => {
-        
         e.preventDefault();
         const data = {
             firstName: firstName,
@@ -40,7 +39,6 @@ const Contact = () => {
           if (response.status === 204) {
             console.log(response);
             setShowMessage("Please give valid details");
-
             setError(true);
             return;
           }
