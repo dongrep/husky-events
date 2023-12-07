@@ -4,7 +4,7 @@ const bookingSchema = new mongoose.Schema({
   eventId: String,
   userId: String,
   status: String,
-  cost: Number,
+//   cost: Number,
 },
 { timestamps: true }
 );

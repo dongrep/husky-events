@@ -1,6 +1,6 @@
 export const performAllValidation = (formData) => {
   console.log("Hello from performAllValidation!", formData);
-  const { firstName, lastName, nuId, email, password, confirmPassword, phone } = formData;
+  const { firstName, lastName,  email, password, confirmPassword, phone } = formData;
   const fullNameRegExp = /^[A-Za-z]+(?: [A-Za-z]+)?(?: [A-Za-z]+)?$/;
   const emailRegExp = /^[\w-]+(\.[\w-]+)*@northeastern\.edu$/; // Northeastern University email validation
   const passwordExp = /^(?=.*[A-Za-z0-9])(?=.*[^A-Za-z0-9]).{7,}$/;
@@ -11,8 +11,7 @@ export const performAllValidation = (formData) => {
     !email ||
     !password ||
     !confirmPassword ||
-    !phone ||
-    !nuId
+    !phone 
   ) {
     throw new Error("Please enter all the fields.");
   }
@@ -29,7 +28,5 @@ export const performAllValidation = (formData) => {
     throw new Error("Passwords do not match.");
   } else if (!phone.match(/^\d{10}$/)) {
     throw new Error("Please enter a valid 10-digit phone number.");
-  } else if (!nuId.match(/^\d{9}$/)) {
-    throw new Error("Please enter a valid 9-digit NUID.");
-  }
+  } 
 };

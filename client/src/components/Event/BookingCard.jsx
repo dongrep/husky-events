@@ -56,34 +56,34 @@ const BookingCard = ({ currentEvent, fetchEvent }) => {
           fetchEvent();
           refreshUser();
         }, 2000);
-        axios.post(`http://localhost:8000/payment/made`, {
-          event,
-          userID: user._id
-        })
-          .then((response) => {
-            if (response.data.url) {
-              console.log("Got the url");
+        // axios.post(`http://localhost:8000/payment/made`, {
+        //   event,
+        //   userID: user._id
+        // })
+        //   .then((response) => {
+        //     if (response.data.url) {
+        //       console.log("Got the url");
               
             
-              window.location.href = response.data.url;
+        //       window.location.href = response.data.url;
               
-              const bookingData = { eventId : currentEvent._id, userId : user._id, status : "Paid", cost:0 };
-              const res = axios.post(
-                "http://localhost:8000/payment/create",
-                bookingData
-              );
+        //       const bookingData = { eventId : currentEvent._id, userId : user._id, status : "Paid", cost:0 };
+        //       const res = axios.post(
+        //         "http://localhost:8000/payment/create",
+        //         bookingData
+        //       );
             
-            } else {
-              console.log("No URL received");
-            }
-          })
-          .catch((error) => {
-            console.error("Error:", error.message);
-            // Handle the error, e.g., show an error message to the user
-          })
-          .finally(() => {
-            console.log("Request completed, regardless of success or failure");
-          });
+        //     } else {
+        //       console.log("No URL received");
+        //     }
+        //   })
+        //   .catch((error) => {
+        //     console.error("Error:", error.message);
+        //     // Handle the error, e.g., show an error message to the user
+        //   })
+        //   .finally(() => {
+        //     console.log("Request completed, regardless of success or failure");
+        //   });
 
       } else if (response.status === 404) {
         setError(true);

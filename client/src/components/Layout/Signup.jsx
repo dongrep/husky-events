@@ -17,7 +17,7 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [nuId, setNuId] = useState("");
+  // const [nuId, setNuId] = useState("");
 
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -34,7 +34,6 @@ export default function Signup() {
       const formData = {
         firstName: firstName,
         lastName: lastName,
-        nuId: nuId,
         email: email,
         password: password,
         confirmPassword: confirmPassword,
@@ -128,12 +127,12 @@ export default function Signup() {
                 placeholder={"Your Last Name"}
               />
 
-              <FormInput
+              {/* <FormInput
                 label="NUID"
                 value={nuId}
                 setValue={setNuId}
                 placeholder={"Your NUID"}
-              />
+              /> */}
 
               <FormInput
                 label="Email"
@@ -153,6 +152,7 @@ export default function Signup() {
               <FormInput
                 label="Password"
                 value={password}
+                type="password"
                 setValue={setPassword}
                 placeholder={"Your Password"}
                 obscureText={true}
@@ -161,6 +161,7 @@ export default function Signup() {
               <FormInput
                 label="Confirm Password"
                 value={confirmPassword}
+                type="password"
                 setValue={setConfirmPassword}
                 placeholder={"Confirm Password"}
                 obscureText={true}

@@ -106,6 +106,7 @@ export default function Login() {
                 <FormInput
                   label="Password"
                   value={password}
+                  type="password"
                   setValue={setPassword}
                   placeholder={"Your Password"}
                 />

@@ -4,7 +4,7 @@ const stripe  = require("stripe")("sk_test_51OJkayGuq2pJVYHIQTvwbgDFlQaZrXNDqrFR
 const app = express();
 const cors = require("cors");
 const bodyParser = require('body-parser');
-const Booking = require("../Model/BookingSchema");
+// const Booking = require("../Model/BookingSchema");
 app.use(cors({ origin: "http://localhost:3002" }));
 
 router.use(bodyParser.raw({ type: 'application/json' }));
