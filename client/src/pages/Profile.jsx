@@ -100,7 +100,7 @@ const Profile = () => {
           {/* Profile Information */}
           <div className="mb-4 font-light">
             <div className="flex flex-col">
-              <h2 className="text-xl font-semibold mb-2">
+              <h2 className="text-2xl font-semibold mb-2">
                 Profile Information:
               </h2>
               <div className="line h-1 w-20 bg-blue-300"></div>
@@ -117,11 +117,11 @@ const Profile = () => {
 
           {/* Booked Events */}
           <div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col">
               <h2 className="text-2xl font-semibold mb-2">Booked Events :</h2>
               <div className="line h-1 w-20 bg-blue-300"></div>
             </div>
-            <div className="flex w-full overflow-scroll py-4 gap-4 ">
+            <div className="flex w-full overflow-x-scroll py-4 gap-4 ">
               {user?.registeredEvents.length === 0 && (
                 <p>You haven't booked any events.</p>
               )}
@@ -138,11 +138,11 @@ const Profile = () => {
           </div>
           {/* Created Events */}
           <div>
-            <div className="flex mt-10 flex-col items-center">
+            <div className="flex mt-10 flex-col">
               <h2 className="text-2xl font-semibold mb-2">Created Events :</h2>
               <div className="line h-1 w-20 bg-blue-300"></div>
             </div>
-            <div className="flex w-full overflow-scroll py-4 gap-4 ">
+            <div className="flex w-full overflow-x-scroll py-4 gap-4 ">
               {user?.createdEvents?.length === 0 && (
                 <p>You haven't created any events.</p>
               )}
