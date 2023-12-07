@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { performEventsValidation } from "../../services/helper";
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
 import Sidebar from "../sidebar/Sidebar";
@@ -38,6 +39,7 @@ const AddEvent = () => {
   const onSubmit = async () => {
     try {
       const data = { ...info };
+      performEventsValidation(info);
       const res = await axios.post("http://localhost:8000/event/create", data);
       console.log("Hello    onSubmit   res:", res);
       setShowToast(true);
@@ -48,7 +50,9 @@ const AddEvent = () => {
     } catch (error) {
       console.log("Hello    onSubmit   error:", error);
       setShowToast(true);
-      setMessage(error?.response?.data || "Something went wrong");
+      setMessage(
+        error?.response?.data || error?.message || "Something went wrong"
+      );
     }
   };
 

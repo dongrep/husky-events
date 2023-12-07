@@ -8,6 +8,7 @@ import Sidebar from "../sidebar/Sidebar";
 import Toast from "../toast/Toast";
 
 import "./eventDetails.css";
+import { performEventsValidation } from "../../services/helper";
 
 const EventDetails = () => {
   // Ref event
@@ -56,6 +57,7 @@ const EventDetails = () => {
 
   const onSubmit = async () => {
     try {
+      performEventsValidation(event);
       const res = await axios.put(
         `http://localhost:8000/event/edit/${eventId}`,
         event
@@ -65,7 +67,7 @@ const EventDetails = () => {
     } catch (error) {
       console.error("Hello    onSubmit   error:", error);
       setShowToast(true);
-      setMessage(error.message);
+      setMessage(error?.message);
     }
   };
 

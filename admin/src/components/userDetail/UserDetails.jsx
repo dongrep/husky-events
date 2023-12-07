@@ -7,6 +7,7 @@ import Navbar from "../navbar/Navbar";
 import Sidebar from "../sidebar/Sidebar";
 import "./userDetails.css";
 import Toast from "../toast/Toast";
+import { performAllValidation } from "../../services/helper";
 
 const UserDetails = () => {
   // const user = {
@@ -21,10 +22,9 @@ const UserDetails = () => {
   // };
 
   const [user, setUser] = useState({});
-  const [showUpdateToast, setShowUpdateToast] = useState(false);
-  console.log("Hello    UserDetails   user:", user);
+  const [showToast, setShowToast] = useState(false);
+  const [message, setMessage] = useState(false);
   const userId = useLocation().pathname.split("/").pop();
-  console.log("Hello    UserDetails   userId:", userId);
 
   const handleChange = (e) => {
     setUser((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -46,14 +46,22 @@ const UserDetails = () => {
 
   const onSubmit = async () => {
     try {
+      performAllValidation(user);
       const res = await axios.put(
         `http://localhost:8000/user/edit/${userId}`,
         user
       );
-      setShowUpdateToast(true);
+      setShowToast(true);
+      setMessage("User updated successfully");
       console.log("Hello    onSubmit   res:", res);
     } catch (error) {
       console.log("Hello    onSubmit   error:", error);
+      setShowToast(true);
+      setMessage(
+        error?.response?.data?.errorMssg ||
+          error?.message ||
+          "Something went wrong"
+      );
     }
   };
 
@@ -94,7 +102,7 @@ const UserDetails = () => {
                 placeholder="Enter email"
                 value={user.email}
                 id="email"
-                onChange={handleChange}
+                disabled={true}
               />
             </div>
             <div className="formGroup">
@@ -132,10 +140,10 @@ const UserDetails = () => {
             </button>
           </div>
           <Toast
-            message={"User Details have been updated"}
-            show={showUpdateToast}
+            message={message}
+            show={showToast}
             onClose={() => {
-              setShowUpdateToast(false);
+              setShowToast(false);
             }}
           />
         </div>

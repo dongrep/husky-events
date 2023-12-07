@@ -62,6 +62,13 @@ const createUser = async (req, res) => {
       password: hashedPassword,
     });
 
+    const isUserAlreadyExisting = await Users.findOne({ email: email });
+    if (isUserAlreadyExisting) {
+      return res
+        .status(409)
+        .send({ statusCode: 409, errorMssg: "User already exists" });
+    }
+
     const user = await newUser.save();
     res.status(201).send(user);
   } catch (error) {

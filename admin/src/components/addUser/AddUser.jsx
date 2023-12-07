@@ -8,6 +8,7 @@ import Navbar from "../navbar/Navbar";
 import Sidebar from "../sidebar/Sidebar";
 import "./addUser.css";
 import Toast from "../toast/Toast";
+import { performAllValidation } from "../../services/helper";
 
 const AddUser = () => {
   const INITIAL_STATE = {
@@ -22,7 +23,8 @@ const AddUser = () => {
   const navigate = useNavigate();
 
   const [info, setInfo] = useState(INITIAL_STATE);
-  const [showCreateToast, setShowCreateToast] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [message, setMessage] = useState(false);
 
   console.log("Hello    AddUser   info:", info);
 
@@ -32,15 +34,25 @@ const AddUser = () => {
 
   const onSubmit = async () => {
     try {
+      performAllValidation(info);
       const res = await axios.post("http://localhost:8000/user/create", info);
       console.log("Hello    onSubmit   res:", res);
 
-      setShowCreateToast(true);
+      setShowToast(true);
+      setMessage("User created successfully");
 
       setTimeout(() => {
         navigate("/users");
       }, 2000);
     } catch (error) {
+      console.log("Hello    onSubmit   error:", error);
+      setShowToast(true);
+      setMessage(
+        error?.response?.data?.errorMssg ||
+          error?.message ||
+          "Something went wrong"
+      );
+
       console.log("Hello    onSubmit   error:", error);
     }
   };
@@ -115,10 +127,10 @@ const AddUser = () => {
             </button>
           </div>
           <Toast
-            message={"User has been created"}
-            show={showCreateToast}
+            message={message}
+            show={showToast}
             onClose={() => {
-              setShowCreateToast(false);
+              setShowToast(false);
             }}
           />
         </div>
