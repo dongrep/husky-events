@@ -62,6 +62,13 @@ const createUser = async (req, res) => {
       password: hashedPassword,
     });
 
+    const isUserAlreadyExisting = await Users.findOne({ email: email });
+    if (isUserAlreadyExisting) {
+      return res
+        .status(409)
+        .send({ statusCode: 409, errorMssg: "User already exists" });
+    }
+
     const user = await newUser.save();
     res.status(201).send(user);
   } catch (error) {
@@ -139,6 +146,47 @@ const loginUser = async (req, res) => {
   }
 };
 
+// Login Admin
+const loginAdmin = async (req, res) => {
+  try {
+    if (!req.body.email || !req.body.password) {
+      throw new Error("Please enter all fields");
+    }
+
+    const user = await Users.findOne({ email: req.body.email });
+    if (!user) {
+      throw new Error("User is not present");
+    }
+
+    if (user.role !== "admin") {
+      throw new Error("User is not an admin");
+    }
+
+    let checkPassword = await bcrypt.compare(req.body.password, user.password);
+    console.log("Hello    app.post   checkPassword:", checkPassword);
+    if (!checkPassword) {
+      throw new Error("Email or password is incorrect");
+    }
+
+    const token = jwt.sign(
+      { id: user._id, isAdmin: user.role === "admin" },
+      process.env.JWT,
+      {
+        expiresIn: "24h", // expires in 24 hours
+      }
+    );
+    const { password, ...otherDetails } = user._doc;
+
+    res
+      .cookie("access_token", token, { httpOnly: true })
+      .status(200)
+      .json({ details: { ...otherDetails, token } });
+  } catch (error) {
+    console.log("Hello    app.delete   error:", error);
+    res.status(500).send({ statusCode: 500, errorMssg: error.message });
+  }
+};
+
 const getUsersCount = async (req, res) => {
   const userCount = await Users.countDocuments();
 
@@ -154,4 +202,5 @@ module.exports = {
   loginUser,
   getUsersCount,
   getUserByToken,
+  loginAdmin,
 };
