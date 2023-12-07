@@ -9,9 +9,11 @@ router.post("/create", (request, response) => {
     name,
     description,
     organizer,
-    scheduleTime,
-    duration,
+    startTime,
+    endTime,
+    cost,
     location,
+    locationUrl,
     image,
     tags,
   } = request.body;
@@ -22,8 +24,8 @@ router.post("/create", (request, response) => {
       name,
       description,
       organizer,
-      scheduleTime,
-      duration,
+      startTime,
+      endTime,
       location,
       image,
       tags,
@@ -44,16 +46,23 @@ router.post("/create", (request, response) => {
     name,
     description,
     organizer,
-    scheduleTime,
-    duration,
+    startTime,
+    endTime,
+    cost: cost ? cost : 0,
     location,
+    locationUrl,
     image,
     tags,
   });
 
+  let savedEvent;
+
   newEvent.save().then(
     () => {
       response.send("Event created successfully");
+      savedEvent = newEvent;
+      const neededUser = user.findOne({ _id: organizer });
+      neededUser.createdEvents.push(savedEvent._id);
     },
     (err) => response.status(400).send({ message: err }),
   );
@@ -65,9 +74,11 @@ router.put("/edit", async (request, response) => {
     name,
     description,
     organizer,
-    scheduleTime,
-    duration,
+    startTime,
+    endTime,
+    cost,
     location,
+    locationUrl,
     image,
     tags,
   } = request.body;
@@ -83,9 +94,11 @@ router.put("/edit", async (request, response) => {
       name,
       description,
       organizer,
-      scheduleTime,
-      duration,
+      startTime,
+      endTime,
+      cost,
       location,
+      locationUrl,
       image,
       tags,
     },
@@ -100,8 +113,6 @@ router.put("/edit", async (request, response) => {
 
 router.delete("/delete", async (request, response) => {
   const { _id } = request.query;
-  console.log("Hello    router.delete   request.body:", request.body);
-  console.log("Hello    router.delete   _id:", _id);
 
   if (!_id) {
     response.status(400).send({ error: "Missing required fields" });
@@ -122,7 +133,6 @@ router.get("/events", async (request, response) => {
 
   if (searchQuery) {
     const regex = new RegExp(searchQuery, "i");
-    console.log("Hello    getAllUsers   searchQuery:", searchQuery);
     const events = await event.find({
       $or: [
         { name: { $regex: regex } },
@@ -178,6 +188,58 @@ router.put("/register", async (request, response) => {
     neededEvent.save();
     neededUser.save();
     response.status(201).send("User registered successfully!");
+  }
+});
+
+router.get("/getregisteredevents", async (request, response) => {
+  const { userID } = request.query;
+
+  if (!userID) {
+    response.status(400).send({ error: "Missing required fields" });
+    return;
+  }
+
+  let neededUser = await user.findOne({ _id: userID });
+
+  if (!neededUser) {
+    response.status(404).send("User not found!");
+  } else {
+    let registeredEvents = [];
+
+    for (let i = 0; i < neededUser.registeredEvents.length; i++) {
+      let neededEvent = await event.findOne({
+        _id: neededUser.registeredEvents[i],
+      });
+      registeredEvents.push(neededEvent);
+    }
+
+    response.status(200).send(registeredEvents);
+  }
+});
+
+router.get("/getcreatedevents", async (request, response) => {
+  const { userID } = request.query;
+
+  if (!userID) {
+    response.status(400).send({ error: "Missing required fields" });
+    return;
+  }
+
+  let neededUser = await user.findOne({ _id: userID });
+
+  if (!neededUser) {
+    response.status(404).send("User not found!");
+  } else {
+    let yourEvents = [];
+
+    for (let i = 0; i < neededUser.yourEvents.length; i++) {
+      let neededEvent = await event.findOne({
+        _id: neededUser.yourEvents[i],
+      });
+      yourEvents.push(neededEvent);
+    }
+
+    response.status(200).send(yourEvents);
   }
 });
 

@@ -45,8 +45,8 @@ const NavBar = () => {
               <Link
                 to="/profile"
                 className="flex line-clamp-2 items-center gap-2">
-                <IoPersonCircleSharp className="h-12 w-12 text-primary" />
-                <div className="flex flex-col">
+                <IoPersonCircleSharp className="h-12 w-12 text-primary hidden md:block" />
+                <div className="flex flex-col text-xs lg:text-base">
                   {getGretting()}
                   <span className="font-bold text-primary">{` ${user.firstName}`}</span>
                 </div>

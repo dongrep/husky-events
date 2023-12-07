@@ -117,7 +117,7 @@ const BookingCard = ({ currentEvent, fetchEvent }) => {
   };
 
   return (
-    <div className="relative rounded-lg bg-white p-8 w-full mx-12 mx-auto flex flex-col items-start">
+    <div className="relative rounded-lg bg-white p-8 min-w-[20vw] mx-auto flex flex-col items-start">
       {bookNow && (
         <Modal title="Book Now">
           <div className="text-lg text-black">
