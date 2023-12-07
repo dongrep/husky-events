@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import DefaultLayout from "../components/Layout/DefaultLayout";
 import { AuthContext } from "../context/authContext";
 import { IoPencilOutline, IoPersonCircleSharp } from "react-icons/io5";
@@ -7,6 +8,7 @@ import axios from "axios";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [editMode, setEditMode] = useState(false);
   const [newImageUrl, setNewImageUrl] = useState("");
@@ -42,6 +44,8 @@ const Profile = () => {
         setLoadingEvents(false);
       };
       fetchEvents();
+    } else{
+      navigate("/");
     }
   }, [user]);
 
